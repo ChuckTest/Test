@@ -76,6 +76,32 @@ namespace BmpProject
             }
         }
 
+        private void btnChooseBmp_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog open = new OpenFileDialog();
+            open.InitialDirectory = System.Environment.CurrentDirectory;
+            if (open.ShowDialog() == DialogResult.OK)
+            {
+                txtFilePath.Text = open.FileName;
+                Bitmap bmPic = new Bitmap(open.FileName);
+                Point ptLoction = new Point(bmPic.Size);
+                if (ptLoction.X > pictureBox1.Size.Width || ptLoction.Y > pictureBox1.Size.Height)
+                {
+                    //圖像框的停靠方式   
+                    //pcbPic.Dock = DockStyle.Fill;   
+                    //圖像充滿圖像框，並且圖像維持比例   
+                    pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+                }
+                else
+                {
+                    //圖像在圖像框置中   
+                    pictureBox1.SizeMode = PictureBoxSizeMode.CenterImage;
+                }
+                pictureBox1.Image = Image.FromFile(open.FileName);
+
+            }
+        }
+
     }
     
 }
