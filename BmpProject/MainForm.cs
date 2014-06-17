@@ -160,11 +160,20 @@ namespace BmpProject
                 fsBLOBFile.Read(bytBLOBData, 0, bytBLOBData.Length);
                 fsBLOBFile.Close();
                 buffer = bytBLOBData;
-                MemoryStream stmBLOBData = new MemoryStream(buffer);
-                System.Drawing.Image img = System.Drawing.Image.FromStream(stmBLOBData);
-                Bitmap bmpobj = (Bitmap)img;
-                lblPicSize.Text = string.Format("图像宽:{0}, 图像高:{1}", bmpobj.Width, bmpobj.Height);
+                ShowPicSize(buffer);
             }
+        }
+
+        /// <summary>
+        /// 展示图片的大小
+        /// </summary>
+        /// <param name="buffer"></param>
+        private void ShowPicSize(byte[] buffer)
+        {
+            MemoryStream stmBLOBData = new MemoryStream(buffer);
+            System.Drawing.Image img = System.Drawing.Image.FromStream(stmBLOBData);
+            Bitmap bmpobj = (Bitmap)img;
+            lblPicSize.Text = string.Format("图像宽:{0}, 图像高:{1}", bmpobj.Width, bmpobj.Height);
         }
 
         /// <summary>
