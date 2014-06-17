@@ -179,7 +179,7 @@
             this.Controls.Add(this.label4);
             this.Controls.Add(this.comboBox4);
             this.Name = "ConfigForm";
-            this.Text = "ConfigForm";
+            this.Text = "串口参数设置";
             this.ResumeLayout(false);
             this.PerformLayout();
 
