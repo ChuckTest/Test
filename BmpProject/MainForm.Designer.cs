@@ -39,17 +39,18 @@
             this.lalFilePath = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.lblCoordinate = new System.Windows.Forms.Label();
+            this.lblPicSize = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.btnSend = new System.Windows.Forms.Button();
             this.btnLoadNewCurve = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.btnSend = new System.Windows.Forms.Button();
-            this.lblPicSize = new System.Windows.Forms.Label();
             this.tspMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -135,9 +136,13 @@
             this.pictureBox1.Size = new System.Drawing.Size(344, 424);
             this.pictureBox1.TabIndex = 4;
             this.pictureBox1.TabStop = false;
+            this.pictureBox1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseDown);
             // 
             // groupBox1
             // 
+            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.groupBox1.Controls.Add(this.lblCoordinate);
             this.groupBox1.Controls.Add(this.lblPicSize);
             this.groupBox1.Controls.Add(this.pictureBox1);
             this.groupBox1.Location = new System.Drawing.Point(0, 55);
@@ -146,6 +151,24 @@
             this.groupBox1.TabIndex = 5;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "图片展示区";
+            // 
+            // lblCoordinate
+            // 
+            this.lblCoordinate.AutoSize = true;
+            this.lblCoordinate.Location = new System.Drawing.Point(184, 24);
+            this.lblCoordinate.Name = "lblCoordinate";
+            this.lblCoordinate.Size = new System.Drawing.Size(71, 12);
+            this.lblCoordinate.TabIndex = 6;
+            this.lblCoordinate.Text = "坐标(行,列)";
+            // 
+            // lblPicSize
+            // 
+            this.lblPicSize.AutoSize = true;
+            this.lblPicSize.Location = new System.Drawing.Point(12, 24);
+            this.lblPicSize.Name = "lblPicSize";
+            this.lblPicSize.Size = new System.Drawing.Size(53, 12);
+            this.lblPicSize.TabIndex = 5;
+            this.lblPicSize.Text = "图片大小";
             // 
             // tabControl1
             // 
@@ -185,6 +208,17 @@
             this.groupBox2.TabIndex = 7;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "曲线设置";
+            // 
+            // btnSend
+            // 
+            this.btnSend.Enabled = false;
+            this.btnSend.Location = new System.Drawing.Point(282, 23);
+            this.btnSend.Name = "btnSend";
+            this.btnSend.Size = new System.Drawing.Size(75, 23);
+            this.btnSend.TabIndex = 5;
+            this.btnSend.Text = "发送";
+            this.btnSend.UseVisualStyleBackColor = true;
+            this.btnSend.Click += new System.EventHandler(this.btnSend_Click);
             // 
             // btnLoadNewCurve
             // 
@@ -227,26 +261,6 @@
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(100, 21);
             this.textBox1.TabIndex = 0;
-            // 
-            // btnSend
-            // 
-            this.btnSend.Enabled = false;
-            this.btnSend.Location = new System.Drawing.Point(282, 23);
-            this.btnSend.Name = "btnSend";
-            this.btnSend.Size = new System.Drawing.Size(75, 23);
-            this.btnSend.TabIndex = 5;
-            this.btnSend.Text = "发送";
-            this.btnSend.UseVisualStyleBackColor = true;
-            this.btnSend.Click += new System.EventHandler(this.btnSend_Click);
-            // 
-            // lblPicSize
-            // 
-            this.lblPicSize.AutoSize = true;
-            this.lblPicSize.Location = new System.Drawing.Point(12, 24);
-            this.lblPicSize.Name = "lblPicSize";
-            this.lblPicSize.Size = new System.Drawing.Size(53, 12);
-            this.lblPicSize.TabIndex = 5;
-            this.lblPicSize.Text = "图片大小";
             // 
             // MainForm
             // 
@@ -298,6 +312,7 @@
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.Button btnSend;
         private System.Windows.Forms.Label lblPicSize;
+        private System.Windows.Forms.Label lblCoordinate;
     }
 }
 

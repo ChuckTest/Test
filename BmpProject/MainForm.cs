@@ -20,7 +20,7 @@ namespace BmpProject
         private PointPairList list2;
         private string sBmpFilePath;
         private byte[] buffer;
-
+        private Image myImage;
         public MainForm()
         {
             InitializeComponent();
@@ -36,9 +36,15 @@ namespace BmpProject
             serialPort = new SerialPort();
             zedGraphcontrol = new ZedGraphControl();
             zedGraphcontrol.IsShowPointValues = true;//显示曲线上存在点的坐标
+            zedGraphcontrol.IsShowHScrollBar = true;//显示水平滑动条
+            zedGraphcontrol.IsShowVScrollBar = true;//显示垂直滑动条
+            zedGraphcontrol.IsEnableVZoom = false;//禁用垂直缩放功能
+            zedGraphcontrol.IsAutoScrollRange = true;//保证可以水平拖动滑动条,且滑动条不会消失
+         
             SetAnchor(zedGraphcontrol);
             list1 = new PointPairList();
             list2 = new PointPairList();
+            //myImage = new Image();
         }
 
         /// <summary>
@@ -148,7 +154,8 @@ namespace BmpProject
                     //图像在图像框置中
                     pictureBox1.SizeMode = PictureBoxSizeMode.CenterImage;
                 }
-                pictureBox1.Image = Image.FromFile(open.FileName);
+                pictureBox1.Image = Image.FromFile(open.FileName);//将图片加载到picturebox上面
+                myImage = pictureBox1.Image;
                 openFlag = true;
             }
             if (openFlag == true)//将十六进制的图片数据读出
@@ -195,8 +202,7 @@ namespace BmpProject
             mypane.AddCurve("正弦曲线", list1, Color.Red, SymbolType.None);
             mypane.AddCurve("余弦曲线", list2, Color.Purple, SymbolType.None);
 
-            zedGraphcontrol.AxisChange();
-            this.tabPage1.Controls.Add(zedGraphcontrol);
+            RefreshZedGraphControl();
         }
 
         /// <summary>
@@ -285,9 +291,7 @@ namespace BmpProject
                 curve2.Line.IsSmooth = true;
                 curve2.Line.SmoothTension = 0.5F;
 
-                zedGraphcontrol.AxisChange();
-                this.tabPage1.Controls.Clear();
-                this.tabPage1.Controls.Add(zedGraphcontrol);
+                RefreshZedGraphControl();
             }
             else
             {
@@ -300,8 +304,105 @@ namespace BmpProject
          
         }
 
+        /// <summary>
+        /// 将当前点坐标(基于picturebox的)转换为基于图片的坐标
+        /// </summary>
+        /// <param name="coordinates"></param>
+        /// <returns></returns>
+        private Point TranslateZoomMousePosition(Point coordinates)
+        {
+            int Width = this.pictureBox1.Width;
+            int Height = this.pictureBox1.Height;
+            // test to make sure our image is not null
+            if (myImage == null) return coordinates;
+            // Make sure our control width and height are not 0 and our 
+            // image width and height are not 0
+            if (Width == 0 || Height == 0 || myImage.Width == 0 || myImage.Height == 0) return coordinates;
+            // This is the one that gets a little tricky. Essentially, need to check 
+            // the aspect ratio of the image to the aspect ratio of the control
+            // to determine how it is being rendered
+            float imageAspect = (float)myImage.Width / myImage.Height;
+            float controlAspect = (float)Width / Height;
+            float newX = coordinates.X;
+            float newY = coordinates.Y;
+            if (imageAspect > controlAspect)
+            {
+                // This means that we are limited by width, 
+                // meaning the image fills up the entire control from left to right
+                float ratioWidth = (float)myImage.Width / Width;
+                newX *= ratioWidth;
+                float scale = (float)Width / myImage.Width;
+                float displayHeight = scale * myImage.Height;
+                float diffHeight = Height - displayHeight;
+                diffHeight /= 2;
+                newY -= diffHeight;
+                newY /= scale;
+            }
+            else
+            {
+                // This means that we are limited by height, 
+                // meaning the image fills up the entire control from top to bottom
+                float ratioHeight = (float)myImage.Height / Height;
+                newY *= ratioHeight;
+                float scale = (float)Height / myImage.Height;
+                float displayWidth = scale * myImage.Width;
+                float diffWidth = Width - displayWidth;
+                diffWidth /= 2;
+                newX -= diffWidth;
+                newX /= scale;
+            }
+            return new Point((int)newX, (int)newY);
+        }
 
+        private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
+        {
+            Point p = new Point(e.X,e.Y);
+            p = TranslateZoomMousePosition(p);
+            if (p.X >= 0 && p.Y >= 0 && p.X <= myImage.Width && p.Y <= myImage.Height)
+            {
+                lblCoordinate.Text = string.Format("坐标(第{0}行,第{1}列)", p.Y, p.X);
 
+                MemoryStream stmBLOBData = new MemoryStream(buffer);
+                System.Drawing.Image img = System.Drawing.Image.FromStream(stmBLOBData);
+                Bitmap bmpobj = (Bitmap)img;
+
+                List<System.Drawing.Color> retList1 = GrayByPixels(bmpobj, p.Y);
+                list1.Clear();
+                for (int i = 0; i < retList1.Count; i++)
+                {
+                    int tmpValue = GetGrayNumColor(retList1[i]);//计算灰度值
+                    list1.Add(i, tmpValue);
+                }
+                zedGraphcontrol.GraphPane.CurveList.Clear();
+                LineItem curve1 = zedGraphcontrol.GraphPane.AddCurve(string.Format("{0}行数据的灰度值曲线", p.X), list1, Color.Red, SymbolType.Circle);
+                curve1.Line.IsSmooth = true;
+                curve1.Line.SmoothTension = 0.5F;
+                RefreshZedGraphControl();
+            }
+        }
+
+        private void RefreshZedGraphControl()
+        {
+            SetAxisRange();
+            zedGraphcontrol.AxisChange();
+            this.tabPage1.Controls.Clear();
+            this.tabPage1.Controls.Add(zedGraphcontrol);
+        }
+
+        /// <summary>
+        /// 如果已经加载了图片,做坐标轴的最大和最小值根据图片来设置
+        /// </summary>
+        private void SetAxisRange()
+        {
+            if (myImage != null)
+            {
+                zedGraphcontrol.GraphPane.XAxis.Scale.Max = myImage.Width;
+                zedGraphcontrol.GraphPane.YAxis.Scale.Max = 250;
+                zedGraphcontrol.GraphPane.XAxis.Scale.MinGrace = 0;
+                zedGraphcontrol.GraphPane.XAxis.Scale.MaxGrace = 0;
+                zedGraphcontrol.GraphPane.XAxis.Scale.Min = 0;
+            }
+        }
     }
     
 }
