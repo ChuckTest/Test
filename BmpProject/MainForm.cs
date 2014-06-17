@@ -16,11 +16,21 @@ namespace BmpProject
     {
         private SerialPort serialPort;
         private ZedGraphControl zedGraphcontrol;
+
+        /// <summary>
+        /// 曲线1
+        /// </summary>
         private PointPairList list1;
+
+        /// <summary>
+        /// 曲线2
+        /// </summary>
         private PointPairList list2;
+
         private string sBmpFilePath;
         private byte[] buffer;
         private Image myImage;
+
         public MainForm()
         {
             InitializeComponent();
@@ -251,45 +261,57 @@ namespace BmpProject
             int lineNumber2;
             if (buffer != null)
             {
-                try
-                {
-                    lineNumber1 = int.Parse(this.textBox1.Text);
-                    lineNumber2 = int.Parse(this.textBox2.Text);
-                }
-                catch
-                {
-                    MessageBox.Show("错误", "请输入正确的行号", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
-
                 MemoryStream stmBLOBData = new MemoryStream(buffer);
                 System.Drawing.Image img = System.Drawing.Image.FromStream(stmBLOBData);
                 Bitmap bmpobj = (Bitmap)img;
 
-                List<System.Drawing.Color> retList1 = GrayByPixels(bmpobj, lineNumber1);
-                list1.Clear();
-                for (int i = 0; i < retList1.Count; i++)
-                {
-                    int tmpValue = GetGrayNumColor(retList1[i]);//计算灰度值
-                    list1.Add(i, tmpValue);
-                }
-
-                List<System.Drawing.Color> retList2 = GrayByPixels(bmpobj, lineNumber2);
-                list2.Clear();
-                for (int i = 0; i < retList2.Count; i++)
-                {
-                    int tmpValue = GetGrayNumColor(retList2[i]);//计算灰度值
-                    list2.Add(i, tmpValue);
-                }
-
                 zedGraphcontrol.GraphPane.CurveList.Clear();
-                LineItem curve1 = zedGraphcontrol.GraphPane.AddCurve(string.Format("{0}行数据的灰度值曲线",lineNumber1), list1, Color.Red, SymbolType.Circle);
-                curve1.Line.IsSmooth = true;
-                curve1.Line.SmoothTension = 0.5F;
+                if (checkBox1.Checked)
+                {
+                    try
+                    {
+                        lineNumber1 = int.Parse(this.textBox1.Text);
+                    }
+                    catch
+                    {
+                        MessageBox.Show("请输入正确的行号", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+                    List<System.Drawing.Color> retList1 = GrayByPixels(bmpobj, lineNumber1);
+                    list1.Clear();
+                    for (int i = 0; i < retList1.Count; i++)
+                    {
+                        int tmpValue = GetGrayNumColor(retList1[i]);//计算灰度值
+                        list1.Add(i, tmpValue);
+                    }
+                    LineItem curve1 = zedGraphcontrol.GraphPane.AddCurve(string.Format("{0}行数据的灰度值曲线", lineNumber1), list1, Color.Red, SymbolType.Circle);
+                    curve1.Line.IsSmooth = true;
+                    curve1.Line.SmoothTension = 0.5F;
+                }
 
-                LineItem curve2 = zedGraphcontrol.GraphPane.AddCurve(string.Format("{0}行数据的灰度值曲线", lineNumber2), list2, Color.Blue, SymbolType.Square);
-                curve2.Line.IsSmooth = true;
-                curve2.Line.SmoothTension = 0.5F;
+                if (checkBox2.Checked)
+                {
+                    try
+                    {
+                        lineNumber2 = int.Parse(this.textBox2.Text);
+                    }
+                    catch
+                    {
+                        MessageBox.Show("请输入正确的行号", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+                    List<System.Drawing.Color> retList2 = GrayByPixels(bmpobj, lineNumber2);
+                    list2.Clear();
+                    for (int i = 0; i < retList2.Count; i++)
+                    {
+                        int tmpValue = GetGrayNumColor(retList2[i]);//计算灰度值
+                        list2.Add(i, tmpValue);
+                    }
+                    LineItem curve2 = zedGraphcontrol.GraphPane.AddCurve(string.Format("{0}行数据的灰度值曲线", lineNumber2), list2, Color.Blue, SymbolType.Square);
+                    curve2.Line.IsSmooth = true;
+                    curve2.Line.SmoothTension = 0.5F;
+                }
+
 
                 RefreshZedGraphControl();
             }
@@ -397,12 +419,13 @@ namespace BmpProject
             if (myImage != null)
             {
                 zedGraphcontrol.GraphPane.XAxis.Scale.Max = myImage.Width;
-                zedGraphcontrol.GraphPane.YAxis.Scale.Max = 250;
+                zedGraphcontrol.GraphPane.YAxis.Scale.Max = 255;
                 zedGraphcontrol.GraphPane.XAxis.Scale.MinGrace = 0;
                 zedGraphcontrol.GraphPane.XAxis.Scale.MaxGrace = 0;
                 zedGraphcontrol.GraphPane.XAxis.Scale.Min = 0;
             }
         }
+
     }
     
 }
