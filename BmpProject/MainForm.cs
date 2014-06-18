@@ -31,6 +31,7 @@ namespace BmpProject
         private byte[] buffer;
         private Image myImage;
 
+        private List<LineItem> lineitemList;
         public MainForm()
         {
             InitializeComponent();
@@ -50,11 +51,94 @@ namespace BmpProject
             zedGraphcontrol.IsShowVScrollBar = true;//显示垂直滑动条
             zedGraphcontrol.IsEnableVZoom = false;//禁用垂直缩放功能
             zedGraphcontrol.IsAutoScrollRange = true;//保证可以水平拖动滑动条,且滑动条不会消失
-         
+            zedGraphcontrol.MouseClick += ZedGraphControl_MouseClick;
+            zedGraphcontrol.ZoomEvent += zedGraphcontrol_ZoomEvent;
             SetAnchor(zedGraphcontrol);
             list1 = new PointPairList();
             list2 = new PointPairList();
-            //myImage = new Image();
+            lineitemList = new List<LineItem>();
+        }
+
+        /// <summary>
+        /// 缩放的时候,将单击的时候生成的坐标ZedGraph.TextObj和垂直线清除掉
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="oldState"></param>
+        /// <param name="newState"></param>
+        private void zedGraphcontrol_ZoomEvent(ZedGraphControl sender, ZoomState oldState, ZoomState newState)
+        {
+            ClearCoordinateVerticalLine();
+        }
+
+        /// <summary>
+        /// 清除坐标和垂线
+        /// </summary>
+        private void ClearCoordinateVerticalLine()
+        {  
+            //清除显示的坐标
+            zedGraphcontrol.GraphPane.GraphObjList.Clear();
+            //清除竖线
+            foreach (LineItem l in lineitemList)
+            {
+                zedGraphcontrol.GraphPane.CurveList.Remove(l);
+            }
+        }
+
+
+        /// <summary>
+        /// 鼠标在画板上的单击事件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ZedGraphControl_MouseClick(object sender, MouseEventArgs e)
+        {
+            PointPairList list = new PointPairList();
+            double x;
+            double y;
+            zedGraphcontrol.GraphPane.ReverseTransform(e.Location, out x, out y);
+            if (x > 0)
+            {
+                if (x <= list1.Count || x <= list2.Count)
+                {
+                    //画垂直的线
+                    list.Add(Convert.ToInt32(x), zedGraphcontrol.GraphPane.YAxis.Scale.Max);
+                    list.Add(Convert.ToInt32(x), zedGraphcontrol.GraphPane.YAxis.Scale.Min);
+                    LineItem lineItem = zedGraphcontrol.GraphPane.AddCurve("", list, Color.Black, SymbolType.None);
+                    lineitemList.Add(lineItem);
+                }
+                if (x <= list1.Count)
+                {
+                    AddCoordinate(Convert.ToInt32(x),list1,Color.Green);
+                }
+                if (x <= list2.Count)
+                {
+                    AddCoordinate(Convert.ToInt32(x),list2,Color.Purple);
+                }
+                zedGraphcontrol.Refresh();
+            }
+        }
+
+        /// <summary>
+        /// 添加坐标点
+        /// </summary>
+        /// <param name="x">横坐标</param>
+        /// <param name="list">坐标list</param>
+        /// <param name="color">坐标颜色</param>
+        private void AddCoordinate(int x,IPointList list,Color color)
+        {
+            ZedGraph.PointPair pt;
+            ZedGraph.TextObj text;
+            pt = list[x];
+            text = new ZedGraph.TextObj(string.Format("({0},{1})", pt.X, pt.Y), pt.X, pt.Y,
+               ZedGraph.CoordType.AxisXYScale, ZedGraph.AlignH.Left, ZedGraph.AlignV.Center);
+            text.FontSpec.FontColor = color;
+            text.ZOrder = ZedGraph.ZOrder.A_InFront;
+            // Hide the border and the fill
+            text.FontSpec.Border.IsVisible = false;
+            text.FontSpec.Fill.IsVisible = false;
+            text.FontSpec.Size = 8f;
+            text.FontSpec.Angle = 45;
+            zedGraphcontrol.GraphPane.GraphObjList.Add(text);
         }
 
         /// <summary>
@@ -203,14 +287,14 @@ namespace BmpProject
             mypane.YAxis.Title.Text = "Y轴";
             mypane.Title.Text = "曲线对比";
 
-            for (double i = -2 * Math.PI; i <= 2 * Math.PI; i = i + Math.PI/18.0)
-            {
-                list1.Add(i,Math.Sin(i));
-                list2.Add(i,Math.Cos(i));
-            }
+            //for (double i = -2 * Math.PI; i <= 2 * Math.PI; i = i + Math.PI/18.0)
+            //{
+            //    list1.Add(i,Math.Sin(i));
+            //    list2.Add(i,Math.Cos(i));
+            //}
 
-            mypane.AddCurve("正弦曲线", list1, Color.Red, SymbolType.None);
-            mypane.AddCurve("余弦曲线", list2, Color.Purple, SymbolType.None);
+            //mypane.AddCurve("正弦曲线", list1, Color.Red, SymbolType.None);
+            //mypane.AddCurve("余弦曲线", list2, Color.Purple, SymbolType.None);
 
             RefreshZedGraphControl();
         }
@@ -255,8 +339,14 @@ namespace BmpProject
             return (posClr.R * 19595 + posClr.G * 38469 + posClr.B * 7472) >> 16;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnLoadNewCurve_Click(object sender, EventArgs e)
         {
+            zedGraphcontrol.GraphPane.GraphObjList.Clear();
             int lineNumber1;
             int lineNumber2;
             if (buffer != null)
@@ -311,8 +401,6 @@ namespace BmpProject
                     curve2.Line.IsSmooth = true;
                     curve2.Line.SmoothTension = 0.5F;
                 }
-
-
                 RefreshZedGraphControl();
             }
             else
@@ -405,6 +493,7 @@ namespace BmpProject
 
         private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
         {
+            ClearCoordinateVerticalLine();
             Point p = new Point(e.X,e.Y);
             if (pictureBox1.SizeMode == PictureBoxSizeMode.Zoom)
             {
