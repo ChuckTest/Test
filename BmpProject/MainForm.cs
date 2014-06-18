@@ -284,7 +284,7 @@ namespace BmpProject
                         int tmpValue = GetGrayNumColor(retList1[i]);//计算灰度值
                         list1.Add(i, tmpValue);
                     }
-                    LineItem curve1 = zedGraphcontrol.GraphPane.AddCurve(string.Format("{0}行数据的灰度值曲线", lineNumber1), list1, Color.Red, SymbolType.Circle);
+                    LineItem curve1 = zedGraphcontrol.GraphPane.AddCurve(string.Format("{0}行数据的灰度值曲线", lineNumber1), list1, Color.Red, SymbolType.None);
                     curve1.Line.IsSmooth = true;
                     curve1.Line.SmoothTension = 0.5F;
                 }
@@ -307,7 +307,7 @@ namespace BmpProject
                         int tmpValue = GetGrayNumColor(retList2[i]);//计算灰度值
                         list2.Add(i, tmpValue);
                     }
-                    LineItem curve2 = zedGraphcontrol.GraphPane.AddCurve(string.Format("{0}行数据的灰度值曲线", lineNumber2), list2, Color.Blue, SymbolType.Square);
+                    LineItem curve2 = zedGraphcontrol.GraphPane.AddCurve(string.Format("{0}行数据的灰度值曲线", lineNumber2), list2, Color.Blue, SymbolType.None);
                     curve2.Line.IsSmooth = true;
                     curve2.Line.SmoothTension = 0.5F;
                 }
@@ -327,7 +327,7 @@ namespace BmpProject
         }
 
         /// <summary>
-        /// 将当前点坐标(基于picturebox的)转换为基于图片的坐标
+        /// Zoom模式换算坐标,将当前点坐标(基于picturebox的)转换为基于图片的坐标
         /// </summary>
         /// <param name="coordinates"></param>
         /// <returns></returns>
@@ -376,10 +376,44 @@ namespace BmpProject
             return new Point((int)newX, (int)newY);
         }
 
+        /// <summary>
+        /// centerImage模式换算坐标
+        /// </summary>
+        /// <param name="coordinates"></param>
+        /// <returns></returns>
+        private Point TranslateCenterImageMousePosition(Point coordinates)
+        {
+            int Width = this.pictureBox1.Width;
+            int Height = this.pictureBox1.Height;
+            // Test to make sure our image is not null
+            if (myImage == null) return coordinates;
+            // First, get the top location (relative to the top left of the control) 
+            // of the image itself
+            // To do this, we know that the image is centered, so we get the difference in size 
+            // (width and height) of the image to the control
+            int diffWidth = Width - myImage.Width;
+            int diffHeight = Height - myImage.Height;
+            // We now divide in half to accommodate each side of the image
+            diffWidth /= 2;
+            diffHeight /= 2;
+            // Finally, we subtract this number from the original coordinates
+            // In the case that the image is larger than the picture box, this still works
+            coordinates.X -= diffWidth;
+            coordinates.Y -= diffHeight;
+            return coordinates;
+        }  
+
         private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
         {
             Point p = new Point(e.X,e.Y);
-            p = TranslateZoomMousePosition(p);
+            if (pictureBox1.SizeMode == PictureBoxSizeMode.Zoom)
+            {
+                p = TranslateZoomMousePosition(p);
+            }
+            else if(pictureBox1.SizeMode==PictureBoxSizeMode.CenterImage)
+            {
+                p = TranslateCenterImageMousePosition(p);
+            }
             if (p.X >= 0 && p.Y >= 0 && p.X <= myImage.Width && p.Y <= myImage.Height)
             {
                 lblCoordinate.Text = string.Format("坐标(第{0}行,第{1}列)", p.Y, p.X);
@@ -396,7 +430,7 @@ namespace BmpProject
                     list1.Add(i, tmpValue);
                 }
                 zedGraphcontrol.GraphPane.CurveList.Clear();
-                LineItem curve1 = zedGraphcontrol.GraphPane.AddCurve(string.Format("{0}行数据的灰度值曲线", p.X), list1, Color.Red, SymbolType.Circle);
+                LineItem curve1 = zedGraphcontrol.GraphPane.AddCurve(string.Format("{0}行数据的灰度值曲线", p.X), list1, Color.Red, SymbolType.None);
                 curve1.Line.IsSmooth = true;
                 curve1.Line.SmoothTension = 0.5F;
                 RefreshZedGraphControl();
@@ -424,6 +458,12 @@ namespace BmpProject
                 zedGraphcontrol.GraphPane.XAxis.Scale.MaxGrace = 0;
                 zedGraphcontrol.GraphPane.XAxis.Scale.Min = 0;
             }
+        }
+
+        private void btnAnalysis_Click(object sender, EventArgs e)
+        {
+            //list1曲线1
+            //list2曲线2
         }
 
     }
