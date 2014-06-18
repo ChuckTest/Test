@@ -430,7 +430,7 @@ namespace BmpProject
                     list1.Add(i, tmpValue);
                 }
                 zedGraphcontrol.GraphPane.CurveList.Clear();
-                LineItem curve1 = zedGraphcontrol.GraphPane.AddCurve(string.Format("{0}行数据的灰度值曲线", p.X), list1, Color.Red, SymbolType.None);
+                LineItem curve1 = zedGraphcontrol.GraphPane.AddCurve(string.Format("{0}行数据的灰度值曲线", p.Y), list1, Color.Red, SymbolType.None);
                 curve1.Line.IsSmooth = true;
                 curve1.Line.SmoothTension = 0.5F;
                 RefreshZedGraphControl();
