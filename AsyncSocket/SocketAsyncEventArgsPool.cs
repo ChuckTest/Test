@@ -8,21 +8,24 @@ namespace AsyncSocket
 {
     class SocketAsyncEventArgsPool
     {
+        /// <summary>
+        /// 套接字栈
+        /// </summary>
         Stack<SocketAsyncEventArgs> m_pool;
 
-        // Initializes the object pool to the specified size 
-        // 
-        // The "capacity" parameter is the maximum number of 
-        // SocketAsyncEventArgs objects the pool can hold 
+        /// <summary>
+        /// 初始化套接字栈
+        /// </summary>
+        /// <param name="capacity">m_pool中可以存放的套接字的上限</param>
         public SocketAsyncEventArgsPool(int capacity)
         {
             m_pool = new Stack<SocketAsyncEventArgs>(capacity);
         }
 
-        // Add a SocketAsyncEventArg instance to the pool 
-        // 
-        //The "item" parameter is the SocketAsyncEventArgs instance 
-        // to add to the pool 
+        /// <summary>
+        /// 将异步套接字实例压入m_pool
+        /// </summary>
+        /// <param name="item"></param>
         public void Push(SocketAsyncEventArgs item)
         {
             if (item == null) { throw new ArgumentNullException("Items added to a SocketAsyncEventArgsPool cannot be null"); }
@@ -32,8 +35,10 @@ namespace AsyncSocket
             }
         }
 
-        // Removes a SocketAsyncEventArgs instance from the pool 
-        // and returns the object removed from the pool 
+        /// <summary>
+        /// 从栈顶取出一个异步套接字，并移除
+        /// </summary>
+        /// <returns></returns>
         public SocketAsyncEventArgs Pop()
         {
             lock (m_pool)
@@ -42,7 +47,9 @@ namespace AsyncSocket
             }
         }
 
-        // The number of SocketAsyncEventArgs instances in the pool 
+        /// <summary>
+        /// 异步套接字的个数
+        /// </summary>
         public int Count
         {
             get { return m_pool.Count; }

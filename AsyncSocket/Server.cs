@@ -22,13 +22,37 @@ namespace AsyncSocket
         /// 接收缓冲区大小
         /// </summary>
         private int m_receiveBufferSize;// buffer size to use for each socket I/O operation 
+
+        /// <summary>
+        /// 给所有套接字分配的buffer管理
+        /// </summary>
         BufferManager m_bufferManager;  // represents a large reusable set of buffers for all socket operations 
-        const int opsToPreAlloc = 2;    // read, write (don't alloc buffer space for accepts)
+
+        /// <summary>
+        /// 读写
+        /// </summary>
+        const int opsToPreAlloc = 2;    // read, write (don't alloc buffer space for accepts)不给接受的分配缓冲区
+
+        /// <summary>
+        /// 监听套接字
+        /// </summary>
         Socket listenSocket;            // the socket used to listen for incoming connection requests 
         // pool of reusable SocketAsyncEventArgs objects for write, read and accept socket operations
         SocketAsyncEventArgsPool m_readWritePool;
+
+        /// <summary>
+        /// 读取到的字节数
+        /// </summary>
         int m_totalBytesRead;           // counter of the total # bytes received by the server 
+
+        /// <summary>
+        /// 连接在服务端的客户端数量
+        /// </summary>
         int m_numConnectedSockets;      // the total number of clients connected to the server 
+
+        /// <summary>
+        /// 信号
+        /// </summary>
         Semaphore m_maxNumberAcceptedClients;
 
         // Create an uninitialized server instance.   
@@ -46,7 +70,7 @@ namespace AsyncSocket
             // allocate buffers such that the maximum number of sockets can have one outstanding read and  
             //write posted to the socket simultaneously  
             m_bufferManager = new BufferManager(receiveBufferSize * numConnections * opsToPreAlloc,
-                receiveBufferSize);
+                receiveBufferSize * opsToPreAlloc);//单个套接字的缓冲区大小，也需要* opsToPreAlloc，否则只用了1/opsToPreAlloc的空间
 
             m_readWritePool = new SocketAsyncEventArgsPool(numConnections);
             m_maxNumberAcceptedClients = new Semaphore(numConnections, numConnections);
@@ -66,14 +90,17 @@ namespace AsyncSocket
             // preallocate pool of SocketAsyncEventArgs objects
             SocketAsyncEventArgs readWriteEventArg;
 
+            //创建m_numConnections套接字，压入m_readWritePool中备用，需要的时候就Pop
             for (int i = 0; i < m_numConnections; i++)
             {
                 //Pre-allocate a set of reusable SocketAsyncEventArgs
                 readWriteEventArg = new SocketAsyncEventArgs();
+                //绑定Completed事件
                 readWriteEventArg.Completed += new EventHandler<SocketAsyncEventArgs>(IO_Completed);
                 readWriteEventArg.UserToken = new AsyncUserToken();
 
                 // assign a byte buffer from the buffer pool to the SocketAsyncEventArg object
+                //给每一个新创建的异步套接字分配缓存区
                 m_bufferManager.SetBuffer(readWriteEventArg);
 
                 // add SocketAsyncEventArg to the pool
@@ -122,6 +149,8 @@ namespace AsyncSocket
             }
 
             m_maxNumberAcceptedClients.WaitOne();
+            //AcceptAsync异步接受客户端的连接,有客户端连接上来的时候,会触发acceptEvent.ArgCompleted事件
+            //即为本文件中的AcceptEventArg_Completed函数
             bool willRaiseEvent = listenSocket.AcceptAsync(acceptEventArg);
             if (!willRaiseEvent)
             {
@@ -149,6 +178,7 @@ namespace AsyncSocket
             ((AsyncUserToken)readEventArgs.UserToken).Socket = e.AcceptSocket;
 
             // As soon as the client is connected, post a receive to the connection 
+            //ReceiveAsync异步的接收数据,有数据过来的时候，会触发readEventArgs的Completed事件,即为本文件中的函数IO_Completed
             bool willRaiseEvent = e.AcceptSocket.ReceiveAsync(readEventArgs);
             if (!willRaiseEvent)
             {
@@ -156,6 +186,7 @@ namespace AsyncSocket
             }
 
             // Accept the next connection request
+            //接受下一个连接请求
             StartAccept(e);
         }
 
@@ -194,7 +225,10 @@ namespace AsyncSocket
                 Console.WriteLine("The server has read a total of {0} bytes", m_totalBytesRead);
 
                 //echo the data received back to the client
-                e.SetBuffer(e.Offset, e.BytesTransferred);
+                //无需调整缓冲区的大小,目前默认的缓冲区大小为10,
+                //如果第一次发送的字节数为7，将缓冲区空间设置为10之后，会导致下一次最多只能接收7个字节
+                //如果第二次发10个字节的，会分成两次接收，先接收7字节，再接收另外的3字节
+                //e.SetBuffer(e.Offset, e.BytesTransferred);
                 bool willRaiseEvent = token.Socket.SendAsync(e);
                 if (!willRaiseEvent)
                 {
@@ -204,7 +238,7 @@ namespace AsyncSocket
             }
             else
             {
-                CloseClientSocket(e);
+                CloseClientSocket(e);//接收出错的时候关闭套接字[客户端主动断开连接]
             }
 
         }
@@ -233,7 +267,7 @@ namespace AsyncSocket
             }
             else
             {
-                CloseClientSocket(e);
+                CloseClientSocket(e);//发送出错的时候，关闭套接字[客户端主动断开连接]
             }
         }
 
@@ -244,6 +278,7 @@ namespace AsyncSocket
             // close the socket associated with the client 
             try
             {
+                //禁用发送
                 token.Socket.Shutdown(SocketShutdown.Send);
             }
             // throws if client process has already closed 
@@ -252,11 +287,12 @@ namespace AsyncSocket
 
             // decrement the counter keeping track of the total number of clients connected to the server
             Interlocked.Decrement(ref m_numConnectedSockets);
+
             m_maxNumberAcceptedClients.Release();
             Console.WriteLine("A client has been disconnected from the server. There are {0} clients connected to the server", m_numConnectedSockets);
 
             // Free the SocketAsyncEventArg so they can be reused by another client
-            m_readWritePool.Push(e);
+            m_readWritePool.Push(e);//将空闲的套接字压入m_readWritePool
         }
 
     }    
