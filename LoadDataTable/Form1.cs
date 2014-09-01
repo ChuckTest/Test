@@ -45,8 +45,8 @@ namespace LoadDataTable
             list = new PointPairList();
             number = 20 * 5 * 10000;
             maxNumber = 30000;
-            zedGraphControl1.GraphPane.XAxis.Title.IsOmitMag = false;
-            zedGraphControl1.GraphPane.XAxis.Scale.IsUseTenPower = false;
+            //zedGraphControl1.GraphPane.XAxis.Title.IsOmitMag = true;//标记Title是否显示10的幂[与XAxis.Type无关]
+            //zedGraphControl1.GraphPane.XAxis.Scale.IsUseTenPower = false;//横坐标是否显示10的幂，仅仅在XAxis.Type为AxisType.Log时，此设置才会生效
             zedGraphControl1.IsShowHScrollBar = true;//显示水平滑动条
             
             //zedGraphControl1.GraphPane.XAxis.Scale.IsLog = true;//属性只读的，只有get，没有set
@@ -62,10 +62,11 @@ namespace LoadDataTable
         /// <param name="e"></param>
         private void toolStripButton1_Click(object sender, EventArgs e)
         {
-            //zedGraphControl1.GraphPane.XAxis.Type = AxisType.Log;
-            //zedGraphControl1.GraphPane.XAxis.Scale.Max = number;
-            //zedGraphControl1.GraphPane.XAxis.Scale.MajorStep = number / 4;
-            //zedGraphControl1.GraphPane.XAxis.Scale.MinorStep = number / 4 / 5;
+            //zedGraphControl1.GraphPane.XAxis.Type = AxisType.Log;//X轴的步长 以10的幂逐步变大 10 100 1000 10000
+            zedGraphControl1.GraphPane.XAxis.Scale.Max = number;//设定X轴的最大值
+            zedGraphControl1.GraphPane.XAxis.Scale.MajorStep = number / 10;//设定最大步长
+            zedGraphControl1.GraphPane.XAxis.Scale.MinorStep = number / 10 / 5;//设定最小步长
+            zedGraphControl1.GraphPane.XAxis.Scale.FontSpec.Angle = 45;//设定X轴的字体的倾斜度
             timerPressureTest.Enabled = false;
             try
             {
@@ -111,13 +112,15 @@ namespace LoadDataTable
                     }
                     Stopwatch stopWatch = new Stopwatch();
                     stopWatch.Start();
-                    zedGraphControl1.AxisChange();//重新适应x和y
-                    Console.WriteLine("AxisChange耗时{0}毫秒",stopWatch.ElapsedMilliseconds);
+
+                    //zedGraphControl1.AxisChange();//重新适应x和y
                     zedGraphControl1.Invalidate();//重绘整个界面
                     zedGraphControl1.Update();
                     //zedGraphControl1.Refresh();//比上面的刷新慢了100毫秒左右
-                    Console.WriteLine("Refresh耗时{0}毫秒", stopWatch.ElapsedMilliseconds);
+                    Console.WriteLine("刷新耗时{0}毫秒", stopWatch.ElapsedMilliseconds);
+                    //Console.WriteLine("刷新耗时{0}毫秒", stopWatch.Elapsed.Milliseconds);//去除了整数秒之后剩下来的毫秒数
                     stopWatch.Stop();
+
                 }
                 catch (Exception ex)
                 {
