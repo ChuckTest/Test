@@ -47,7 +47,6 @@ namespace LoadDataTable
             maxNumber = 30000;
             zedGraphControl1.GraphPane.XAxis.Title.IsOmitMag = false;
             zedGraphControl1.GraphPane.XAxis.Scale.IsUseTenPower = false;
-            zedGraphControl1.GraphPane.AddCurve("百万曲线的点", list, Color.Blue, SymbolType.None);
             zedGraphControl1.IsShowHScrollBar = true;//显示水平滑动条
             
             //zedGraphControl1.GraphPane.XAxis.Scale.IsLog = true;//属性只读的，只有get，没有set
@@ -63,11 +62,11 @@ namespace LoadDataTable
         /// <param name="e"></param>
         private void toolStripButton1_Click(object sender, EventArgs e)
         {
-            zedGraphControl1.GraphPane.XAxis.Type = AxisType.Log;
+            //zedGraphControl1.GraphPane.XAxis.Type = AxisType.Log;
             //zedGraphControl1.GraphPane.XAxis.Scale.Max = number;
             //zedGraphControl1.GraphPane.XAxis.Scale.MajorStep = number / 4;
             //zedGraphControl1.GraphPane.XAxis.Scale.MinorStep = number / 4 / 5;
-            this.toolStripButtonLoadData.Enabled = false;
+            timerPressureTest.Enabled = false;
             try
             {
                 if (thread != null)
@@ -97,6 +96,11 @@ namespace LoadDataTable
             {
                 try
                 {
+                    zedGraphControl1.GraphPane.CurveList.Clear(); 
+                    zedGraphControl1.Invalidate();//重绘整个界面
+                    zedGraphControl1.Update();
+                    zedGraphControl1.GraphPane.AddCurve("百万曲线的点", list, Color.Blue, SymbolType.None);
+                    this.toolStripButtonLoadData.Enabled = false;
                     list.Clear();
                     Random r = new Random();
                     double[] x = new double[number];
@@ -127,7 +131,11 @@ namespace LoadDataTable
         {
             //zedGraphControl1.GraphPane.XAxis.Scale.Max = maxNumber;
             //zedGraphControl1.GraphPane.XAxis.Type = AxisType.Text;
+            zedGraphControl1.GraphPane.CurveList.Clear(); 
+            zedGraphControl1.Invalidate();//重绘整个界面
+            zedGraphControl1.Update();
             zedGraphControl1.GraphPane.XAxis.Type = AxisType.Linear;
+            zedGraphControl1.GraphPane.AddCurve("每秒加载300个点", list, Color.Purple, SymbolType.None);
             timerPressureTest.Start();//也可以通过将 Enabled 属性设置为 true 来启动计时器。
         }
 
@@ -205,13 +213,17 @@ namespace LoadDataTable
         /// <param name="e"></param>
         private void toolStripButtonLoadDataTable_Click(object sender, EventArgs e)
         {
+            zedGraphControl1.GraphPane.CurveList.Clear();
+            zedGraphControl1.Invalidate();//重绘整个界面
+            zedGraphControl1.Update();
+            timerPressureTest.Enabled = false;
             DataTable table = CreateDataTable();
             zedGraphControl1.GraphPane.XAxis.Title.Text = "ID";
             zedGraphControl1.GraphPane.YAxis.Title.Text = "Value";
             DataSourcePointList dsp = new DataSourcePointList();
             dsp.DataSource = table;
-            dsp.XDataMember = "ID";
-            dsp.YDataMember = "Value";
+            dsp.XDataMember = "ID";//X轴所对应表中的列名
+            dsp.YDataMember = "Value";//Y轴所对应表中的列名
             zedGraphControl1.GraphPane.AddCurve("从DataTable加载的曲线", dsp, Color.Red,SymbolType.None);
 
             zedGraphControl1.AxisChange();
