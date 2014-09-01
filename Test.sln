@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BmpProject", "BmpProject\Bm
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommonTest", "CommonTest\CommonTest.csproj", "{0A4685FF-19D1-429B-BD39-C5D032ACD0E9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoadDataTable", "LoadDataTable\LoadDataTable.csproj", "{44A95372-717B-4758-BFA5-329023F97E59}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,6 +49,16 @@ Global
 		{0A4685FF-19D1-429B-BD39-C5D032ACD0E9}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{0A4685FF-19D1-429B-BD39-C5D032ACD0E9}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{0A4685FF-19D1-429B-BD39-C5D032ACD0E9}.Release|x86.ActiveCfg = Release|Any CPU
+		{44A95372-717B-4758-BFA5-329023F97E59}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{44A95372-717B-4758-BFA5-329023F97E59}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{44A95372-717B-4758-BFA5-329023F97E59}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{44A95372-717B-4758-BFA5-329023F97E59}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{44A95372-717B-4758-BFA5-329023F97E59}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{44A95372-717B-4758-BFA5-329023F97E59}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{44A95372-717B-4758-BFA5-329023F97E59}.Release|Any CPU.Build.0 = Release|Any CPU
+		{44A95372-717B-4758-BFA5-329023F97E59}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{44A95372-717B-4758-BFA5-329023F97E59}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{44A95372-717B-4758-BFA5-329023F97E59}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
