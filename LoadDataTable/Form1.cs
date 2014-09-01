@@ -44,14 +44,14 @@ namespace LoadDataTable
         {
             list = new PointPairList();
             number = 20 * 5 * 10000;
-            maxNumber = 3000;
+            maxNumber = 30000;
             zedGraphControl1.GraphPane.XAxis.Title.IsOmitMag = false;
             zedGraphControl1.GraphPane.XAxis.Scale.IsUseTenPower = false;
             zedGraphControl1.GraphPane.AddCurve("百万曲线的点", list, Color.Blue, SymbolType.None);
             zedGraphControl1.IsShowHScrollBar = true;//显示水平滑动条
+            
             //zedGraphControl1.GraphPane.XAxis.Scale.IsLog = true;//属性只读的，只有get，没有set
-            //zedGraphControl1.GraphPane.XAxis.Scale.Max = number;
-            //zedGraphControl1.GraphPane.XAxis.Scale.MinorStep = number / 4 / 5;
+           
             //Console.WriteLine("横坐标轴的Scale类型：{0}",zedGraphControl1.GraphPane.XAxis.Scale.IsLog==true?"LogScale":"非LogScale");
         }
        
@@ -64,6 +64,9 @@ namespace LoadDataTable
         private void toolStripButton1_Click(object sender, EventArgs e)
         {
             zedGraphControl1.GraphPane.XAxis.Type = AxisType.Log;
+            //zedGraphControl1.GraphPane.XAxis.Scale.Max = number;
+            //zedGraphControl1.GraphPane.XAxis.Scale.MajorStep = number / 4;
+            //zedGraphControl1.GraphPane.XAxis.Scale.MinorStep = number / 4 / 5;
             this.toolStripButtonLoadData.Enabled = false;
             try
             {

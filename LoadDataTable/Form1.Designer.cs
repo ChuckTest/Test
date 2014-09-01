@@ -110,7 +110,7 @@
             this.Controls.Add(this.toolStrip1);
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "加载点测试";
+            this.Text = "ZedGraph测试";
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             this.ResumeLayout(false);
