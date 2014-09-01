@@ -88,6 +88,9 @@ namespace LoadDataTable
             thread.Start();
         }
 
+        /// <summary>
+        /// 一次性加载100万个点
+        /// </summary>
         private void LoadCurve()
         {
             this.Invoke((MethodInvoker)delegate()
@@ -101,8 +104,6 @@ namespace LoadDataTable
                     for (double i = 0; i < number; i++)
                     {
                         list.Add(i, r.Next(10));
-                        //zedGraphControl1.Invalidate();//重绘整个界面
-                        //System.Threading.Thread.Sleep(1000);
                     }
                     Stopwatch stopWatch = new Stopwatch();
                     stopWatch.Start();
@@ -158,6 +159,61 @@ namespace LoadDataTable
             {
                 list.RemoveRange(0, list.Count - maxNumber);
             }
+            zedGraphControl1.AxisChange();
+            zedGraphControl1.Invalidate();
+            zedGraphControl1.Update();
+        }
+
+        /// <summary>
+        /// 创建表，并填充数据
+        /// </summary>
+        /// <returns></returns>
+        private DataTable CreateDataTable()
+        {
+            DataTable table = new DataTable();
+            DataColumn column;
+
+            column = new DataColumn();
+            column.DataType = System.Type.GetType("System.Int32");
+            column.ColumnName = "ID";
+            table.Columns.Add(column);
+
+            column = new DataColumn();
+            column.DataType = System.Type.GetType("System.Int32"); 
+            column.ColumnName = "Value";
+            table.Columns.Add(column);
+
+            column = new DataColumn();
+            column.DataType = System.Type.GetType("System.String");
+            column.ColumnName = "Value2";
+            table.Columns.Add(column);
+
+            Random r=new Random();
+            for (int i = 0; i < 100; i++)
+            {
+                table.Rows.Add();
+                table.Rows[i]["ID"] = i;
+                table.Rows[i]["Value"] = r.Next(100);
+            }
+            return table;
+        }
+
+        /// <summary>
+        /// 从DataTable加载数据
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void toolStripButtonLoadDataTable_Click(object sender, EventArgs e)
+        {
+            DataTable table = CreateDataTable();
+            zedGraphControl1.GraphPane.XAxis.Title.Text = "ID";
+            zedGraphControl1.GraphPane.YAxis.Title.Text = "Value";
+            DataSourcePointList dsp = new DataSourcePointList();
+            dsp.DataSource = table;
+            dsp.XDataMember = "ID";
+            dsp.YDataMember = "Value";
+            zedGraphControl1.GraphPane.AddCurve("从DataTable加载的曲线", dsp, Color.Red,SymbolType.None);
+
             zedGraphControl1.AxisChange();
             zedGraphControl1.Invalidate();
             zedGraphControl1.Update();

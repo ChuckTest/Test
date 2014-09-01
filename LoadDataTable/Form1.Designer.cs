@@ -36,6 +36,7 @@
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.zedGraphControl1 = new ZedGraph.ZedGraphControl();
             this.timerPressureTest = new System.Windows.Forms.Timer(this.components);
+            this.toolStripButtonLoadDataTable = new System.Windows.Forms.ToolStripButton();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -43,7 +44,8 @@
             // 
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripButtonLoadData,
-            this.toolStripButtonPressureTest});
+            this.toolStripButtonPressureTest,
+            this.toolStripButtonLoadDataTable});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(893, 25);
@@ -100,6 +102,16 @@
             this.timerPressureTest.Interval = 1000;
             this.timerPressureTest.Tick += new System.EventHandler(this.timerPressureTest_Tick);
             // 
+            // toolStripButtonLoadDataTable
+            // 
+            this.toolStripButtonLoadDataTable.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolStripButtonLoadDataTable.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonLoadDataTable.Image")));
+            this.toolStripButtonLoadDataTable.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonLoadDataTable.Name = "toolStripButtonLoadDataTable";
+            this.toolStripButtonLoadDataTable.Size = new System.Drawing.Size(95, 22);
+            this.toolStripButtonLoadDataTable.Text = "加载DataTable";
+            this.toolStripButtonLoadDataTable.Click += new System.EventHandler(this.toolStripButtonLoadDataTable_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -126,6 +138,7 @@
         private ZedGraph.ZedGraphControl zedGraphControl1;
         private System.Windows.Forms.ToolStripButton toolStripButtonPressureTest;
         private System.Windows.Forms.Timer timerPressureTest;
+        private System.Windows.Forms.ToolStripButton toolStripButtonLoadDataTable;
 
     }
 }
