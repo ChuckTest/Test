@@ -11,7 +11,8 @@ namespace ZedGraphWebApplication
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            ZedGraphWeb1.Width = 1800;
+            ZedGraphWeb1.Height = 800;
         }
     }
 }
