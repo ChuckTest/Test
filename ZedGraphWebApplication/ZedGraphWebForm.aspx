@@ -12,7 +12,7 @@
 <body>
     <form id="form1" runat="server">
     <div>
-        <cc1:ZedGraphWeb ID="ZedGraphWeb1" runat="server">
+        <cc1:ZedGraphWeb ID="ZedGraphWeb1" runat="server" OnRenderGraph="ZedGraphWeb1_RenderGraph">
         </cc1:ZedGraphWeb>
     </div>
     </form>
