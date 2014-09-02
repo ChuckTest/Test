@@ -20,7 +20,7 @@ namespace ZedGraphWebApplication
         {
             //Console.WriteLine(pane.PaneList.Count);//默认只有一个pane
             GraphPane mypane = pane[0];
-            mypane.Title.Text = "测试图标";
+            mypane.Title.Text = "测试图表";
             mypane.XAxis.Title.Text = "X轴";
             mypane.YAxis.Title.Text = "Y轴";
             PointPairList list = new PointPairList();
