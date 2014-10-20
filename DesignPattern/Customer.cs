@@ -34,6 +34,14 @@ namespace DesignPattern
             Food food2 = Cook("红烧鱼");
             food2.Print();
 
+            Console.WriteLine();
+
+            food1 = FoodFactory.CreateFood("红烧鱼");
+            food1.Print();
+
+            food2 = FoodFactory.CreateFood("西红柿炒蛋");
+            food2.Print();
+
             Console.Read();
         }
     }
@@ -68,6 +76,26 @@ namespace DesignPattern
         public override void Print()
         {
             Console.WriteLine("一份红烧鱼");
+        }
+    }
+
+    /// <summary>
+    /// 简单工厂类,负责炒菜
+    /// </summary>
+    public class FoodFactory
+    {
+        public static Food CreateFood(string type)
+        {
+            Food food = null;
+            if (type.Equals("西红柿炒蛋"))
+            {
+                food = new TomatoScrambledEggs();
+            }
+            else if (type.Equals("红烧鱼"))
+            {
+                food = new Fish();
+            }
+            return food;
         }
     }
 }
