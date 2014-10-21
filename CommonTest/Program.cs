@@ -14,11 +14,7 @@ namespace CommonTest
         /// <param name="args"></param>
         static void Main(string[] args)
         {
-            int[] comID = CPortID.GetPortID();
-            for (int i = 0; i < comID.Length; i++)
-            {
-                Console.WriteLine(comID[i]);
-            }
+            Chapter06.Ch06Ex05.Method();
             Console.Read();
         }
     }

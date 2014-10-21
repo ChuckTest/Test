@@ -46,5 +46,15 @@ namespace CommonTest
                 throw ex;
             }
         }
+
+
+        public static void Method()
+        {
+            int[] comID = CPortID.GetPortID();
+            for (int i = 0; i < comID.Length; i++)
+            {
+                Console.WriteLine(comID[i]);
+            }
+        }
     }
 }
