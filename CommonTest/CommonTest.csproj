@@ -65,6 +65,8 @@
   <ItemGroup>
     <Compile Include="Chapter06\Ch06Ex05.cs" />
     <Compile Include="Chapter13\Ch13Ex02.cs" />
+    <Compile Include="Chapter13\Ch13Ex03\Ch13Ex03.cs" />
+    <Compile Include="Chapter13\Ch13Ex03\MessageArrivedEventArgs.cs" />
     <Compile Include="Chapter13\Connection.cs" />
     <Compile Include="Chapter13\Display.cs" />
     <Compile Include="CPortID.cs" />
