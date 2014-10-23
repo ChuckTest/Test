@@ -23,7 +23,7 @@ namespace CommonTest.Exccel
                 xlWorkSheet = (Worksheet)xlWorkBook.Worksheets.get_Item(1);
                 xlWorkSheet.Cells[1, 1] = "http://csharp.net-informations.com";
 
-                xlWorkBook.SaveAs("csharp-Excel.xls", XlFileFormat.xlWorkbookNormal, misValue, misValue, misValue, misValue, XlSaveAsAccessMode.xlExclusive, misValue, misValue, misValue, misValue, misValue);
+                xlWorkBook.SaveAs(Environment.CurrentDirectory+"\\csharp-Excel.xls", XlFileFormat.xlWorkbookNormal, misValue, misValue, misValue, misValue, XlSaveAsAccessMode.xlExclusive, misValue, misValue, misValue, misValue, misValue);
                 xlWorkBook.Close(true, misValue, misValue);
                 xlApp.Quit();
 
@@ -31,7 +31,7 @@ namespace CommonTest.Exccel
                 releaseObject(xlWorkBook);
                 releaseObject(xlApp);
 
-                MessageBox.Show("Excel file created , you can find the file 我的文档下有 csharp-Excel.xls");
+                MessageBox.Show(string.Format("Excel file created , you can find the file {0}", Environment.CurrentDirectory + "\\csharp-Excel.xls"));
             }
             catch (Exception ex)
             {
