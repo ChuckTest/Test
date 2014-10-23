@@ -64,6 +64,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Chapter06\Ch06Ex05.cs" />
+    <Compile Include="Chapter13\Ch13Ex02.cs" />
+    <Compile Include="Chapter13\Connection.cs" />
+    <Compile Include="Chapter13\Display.cs" />
     <Compile Include="CPortID.cs" />
     <Compile Include="Exccel\CreateExcel.cs" />
     <Compile Include="Program.cs" />
