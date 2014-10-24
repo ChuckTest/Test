@@ -23,6 +23,7 @@ namespace CommonTest.Chapter13.Ch13Ex03
             //public delegate void ElapsedEventHandler(object sender, ElapsedEventArgs e);
             //sender引发事件的对象的引用
             //ElapsedEventArgs由事件传送的参数
+            //在这个事件中使用object类型参数的原因是，我们常常要为由不同的对象引发的几个相同事件使用同一个事件处理程序，但仍要指定哪个对象引发了事件
         }
         private string name;
         public string Name
