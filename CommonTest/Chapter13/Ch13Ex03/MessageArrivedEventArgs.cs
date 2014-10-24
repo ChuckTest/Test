@@ -5,7 +5,7 @@ using System.Text;
 
 namespace CommonTest.Chapter13.Ch13Ex03
 {
-    class MessageArrivedEventArgs : EventArgs
+    public class MessageArrivedEventArgs : EventArgs
     {
         private string message;
 

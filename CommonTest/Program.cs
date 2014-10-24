@@ -13,7 +13,7 @@ namespace CommonTest
         /// <param name="args"></param>
         static void Main(string[] args)
         {
-            Chapter13.Ch13Ex02.Method();
+            Chapter13.Ch13Ex03.Ch13Ex03.Method();
             Console.Read();
         }
     }
