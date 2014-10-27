@@ -13,7 +13,7 @@ namespace CommonTest
         /// <param name="args"></param>
         static void Main(string[] args)
         {
-            Exccel.LoadExcel.Method(@"D:\Software\ZBMYun\SourceCode\ZITaker\Utility\bin\Debug\Excel\20141027_150903.xlsx");
+            Chapter09.Chapter09Ex03.Method();
             Console.Read();
         }
     }

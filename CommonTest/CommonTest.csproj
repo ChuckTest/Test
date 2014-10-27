@@ -64,6 +64,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Chapter06\Ch06Ex05.cs" />
+    <Compile Include="Chapter09\Chapter09Ex03.cs" />
     <Compile Include="Chapter13\Ch13Ex02.cs" />
     <Compile Include="Chapter13\Ch13Ex03\Ch13Ex03.cs" />
     <Compile Include="Chapter13\Ch13Ex03\Connection.cs" />
