@@ -76,7 +76,13 @@
     <Compile Include="CPortID.cs" />
     <Compile Include="Exccel\CreateExcel.cs" />
     <Compile Include="Exccel\ExcelOperation.cs" />
+    <Compile Include="Exccel\ExportExcel.cs" />
     <Compile Include="Exccel\LoadExcel.cs" />
+    <Compile Include="Log\ExceptionLog.cs" />
+    <Compile Include="Log\Log.cs" />
+    <Compile Include="Log\LogType.cs" />
+    <Compile Include="Log\OperationLog.cs" />
+    <Compile Include="Log\Test.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
