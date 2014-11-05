@@ -13,8 +13,7 @@ namespace CommonTest
         /// <param name="args"></param>
         static void Main(string[] args)
         {
-            Exccel.ExportExcel.ExcelTest();
-            Log.Test.LogTest();
+            Chapter07.Ch07Ex01.Method();
             Console.Read();
         }
     }
