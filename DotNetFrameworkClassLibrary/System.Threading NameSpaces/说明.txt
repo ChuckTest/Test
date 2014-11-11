@@ -1,0 +1,3 @@
+http://msdn.microsoft.com/zh-cn/library/gg145014(v=vs.110).aspx
+The System.Threading namespaces contain types that enable multithreaded programming. 
+A child namespace provides types that simplify the work of writing concurrent and asynchronous code.

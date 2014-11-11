@@ -1,0 +1,9 @@
+http://msdn.microsoft.com/en-us/library/system.threading.tasks.dataflow(v=vs.110).aspx
+
+The System.Threading.Tasks.Dataflow namespace provides an actor-based programming model that supports in-process message passing for coarse-grained dataflow and pipelining tasks.
+For more information, see Dataflow (Task Parallel Library).
+
+
+Tip  (TPL is short for Task Parallel Library)
+The TPL Dataflow Library (System.Threading.Tasks.Dataflow namespace) is not distributed with the .NET Framework 4.5. 
+To install the System.Threading.Tasks.Dataflow namespace, open your project in Visual Studio 2012, choose Manage NuGet Packages from the Project menu, and search online for the Microsoft.Tpl.Dataflow package.

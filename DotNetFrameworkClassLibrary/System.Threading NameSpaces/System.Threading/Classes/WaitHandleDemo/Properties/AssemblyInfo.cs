@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // 有关程序集的常规信息通过以下
 // 特性集控制。更改这些特性值可修改
 // 与程序集关联的信息。
-[assembly: AssemblyTitle("MyWaitHandle")]
+[assembly: AssemblyTitle("WaitHandleDemo")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("MyWaitHandle")]
+[assembly: AssemblyProduct("WaitHandleDemo")]
 [assembly: AssemblyCopyright("Copyright ©  2014")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // 如果此项目向 COM 公开，则下列 GUID 用于类型库的 ID
-[assembly: Guid("566242e0-0bcc-427f-a7f4-7977cd1380aa")]
+[assembly: Guid("bc8bd26c-a0f9-4d5c-b6fe-734a8f9a8027")]
 
 // 程序集的版本信息由下面四个值组成:
 //

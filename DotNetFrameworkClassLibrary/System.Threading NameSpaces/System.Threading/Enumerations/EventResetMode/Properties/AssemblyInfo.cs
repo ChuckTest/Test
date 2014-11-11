@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // 有关程序集的常规信息通过以下
 // 特性集控制。更改这些特性值可修改
 // 与程序集关联的信息。
-[assembly: AssemblyTitle("MyEventResetMode")]
+[assembly: AssemblyTitle("EventResetMode")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("MyEventResetMode")]
+[assembly: AssemblyProduct("EventResetMode")]
 [assembly: AssemblyCopyright("Copyright ©  2014")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // 如果此项目向 COM 公开，则下列 GUID 用于类型库的 ID
-[assembly: Guid("e52b2bb2-3ee1-440a-ab8f-42f762cf879c")]
+[assembly: Guid("cdac031f-5e42-4150-bd62-16fd464c2ec2")]
 
 // 程序集的版本信息由下面四个值组成:
 //
