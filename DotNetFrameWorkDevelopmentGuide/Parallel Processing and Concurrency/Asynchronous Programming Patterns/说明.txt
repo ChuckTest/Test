@@ -1,0 +1,12 @@
+The .NET Framework provides three patterns for performing asynchronous operations:
+
+Asynchronous Programming Model (APM) pattern (also called the IAsyncResult pattern), where asynchronous operations require Begin and End methods (for example, BeginWrite and EndWrite for asynchronous write operations).
+This pattern is no longer recommended for new development. For more information, see Asynchronous Programming Model (APM).
+
+Event-based Asynchronous Pattern (EAP), which requires a method that has the Async suffix, and also requires one or more events, event handler delegate types, and EventArg-derived types. EAP was introduced in the .NET Framework 2.0. 
+It is no longer recommended for new development. For more information, see Event-based Asynchronous Pattern (EAP).
+
+Task-based Asynchronous Pattern (TAP), which uses a single method to represent the initiation and completion of an asynchronous operation. 
+TAP was introduced in the .NET Framework 4 and is the recommended approach to asynchronous programming in the .NET Framework. 
+The async and await keywords in C# and the Async and Await operators in Visual Basic Language add language support for TAP. 
+For more information, see Task-based Asynchronous Pattern (TAP).

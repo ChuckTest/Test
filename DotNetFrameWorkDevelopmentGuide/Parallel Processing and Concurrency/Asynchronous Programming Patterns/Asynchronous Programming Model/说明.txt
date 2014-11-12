@@ -1,0 +1,4 @@
+An asynchronous operation that uses the IAsyncResult design pattern is implemented as two methods named BeginOperationName and EndOperationName that begin and end the asynchronous operation OperationName respectively. 
+For example, the FileStream class provides the BeginRead and EndRead methods to asynchronously read bytes from a file. These methods implement the asynchronous version of the Read method.
+After calling BeginOperationName, an application can continue executing instructions on the calling thread while the asynchronous operation takes place on a different thread. 
+For each call to BeginOperationName, the application should also call EndOperationName to get the results of the operation.

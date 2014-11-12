@@ -1,0 +1,3 @@
+This section explains how to create, configure, debug, secure, and deploy your .NET Framework apps. 
+The section also provides information about technology areas such as dynamic programming, interoperability, extensibility, memory management, and threading.
+动态编程，可操作性，扩展性，内存管理，线程
