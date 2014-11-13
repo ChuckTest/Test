@@ -49,6 +49,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "APM", "APM", "{23FE8445-690
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ComparingPatterns", "DotNetFrameWorkDevelopmentGuide\Parallel Processing and Concurrency\Asynchronous Programming Patterns\ComparingPatterns\ComparingPatterns.csproj", "{EFE1B46F-232E-49D4-ADBC-9FD3150DAC27}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SyncProcedure", "DotNet4.5开发指南\并行处理和并发\异步编程模式\APM\SyncProcedure\SyncProcedure.csproj", "{5708410A-D054-42C3-97AA-940E927796A7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -149,6 +151,16 @@ Global
 		{EFE1B46F-232E-49D4-ADBC-9FD3150DAC27}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{EFE1B46F-232E-49D4-ADBC-9FD3150DAC27}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{EFE1B46F-232E-49D4-ADBC-9FD3150DAC27}.Release|x86.ActiveCfg = Release|Any CPU
+		{5708410A-D054-42C3-97AA-940E927796A7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5708410A-D054-42C3-97AA-940E927796A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5708410A-D054-42C3-97AA-940E927796A7}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{5708410A-D054-42C3-97AA-940E927796A7}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{5708410A-D054-42C3-97AA-940E927796A7}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{5708410A-D054-42C3-97AA-940E927796A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5708410A-D054-42C3-97AA-940E927796A7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5708410A-D054-42C3-97AA-940E927796A7}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{5708410A-D054-42C3-97AA-940E927796A7}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{5708410A-D054-42C3-97AA-940E927796A7}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -171,5 +183,6 @@ Global
 		{A4C6E39E-7215-46AC-8AD1-8EEC0E58FED9} = {39FEC018-3521-4EE7-891B-637867ED607B}
 		{23FE8445-6903-466F-88DF-E10FCC2AE7C2} = {A4C6E39E-7215-46AC-8AD1-8EEC0E58FED9}
 		{EFE1B46F-232E-49D4-ADBC-9FD3150DAC27} = {A4C6E39E-7215-46AC-8AD1-8EEC0E58FED9}
+		{5708410A-D054-42C3-97AA-940E927796A7} = {23FE8445-6903-466F-88DF-E10FCC2AE7C2}
 	EndGlobalSection
 EndGlobal
