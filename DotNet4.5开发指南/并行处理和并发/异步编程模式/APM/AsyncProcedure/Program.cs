@@ -6,38 +6,53 @@ using System.Threading.Tasks;
 using System.Threading;
 namespace AsyncProcedure
 {
-    public delegate string AsyncEventHandler(string name);
+    /// <summary>
+    /// 声明一个委托 委托的名字是AsyncHandler
+    /// </summary>
+    /// <param name="name"></param>
+    public delegate void AsyncHandler();//委托的声明方式类似于函数，只是比函数多了一个delegate关键字
     
-    class AsyncTest
+    static class AsyncTest
     {
-        public string Hello(string name)
+        public static void Method()
         {
-            // 查看当前的线程ID, 是否线程池里面的线程
-            Console.WriteLine("2,Thread ID:#{0},Is PoolThread?{1}",Thread.CurrentThread.ManagedThreadId, Thread.CurrentThread.IsThreadPoolThread);
-            return "Hello:" + name;
+            Console.WriteLine("AsyncTest类中的Method()函数的线程ID是{0}", Thread.CurrentThread.ManagedThreadId);//Environment.CurrentManagedThreadId
+            if (Thread.CurrentThread.IsThreadPoolThread)//判断当前线程是否托管在线程池上
+            {
+                Console.WriteLine("AsyncTest类中的Method()函数的线程托管于线程池");
+            }
+            else
+            {
+                Console.WriteLine("AsyncTest类中的Method()函数的线程没有托管在线程池上");
+            }
         }
     }
 
     class Program
     {
         static void Main(string[] args)
-        {  
-            // 查看当前的线程ID, 是否线程池里面的线程
-            Console.WriteLine("1,Thread ID:#{0},Is PoolThread?{1}", Thread.CurrentThread.ManagedThreadId, Thread.CurrentThread.IsThreadPoolThread);
-           
-            AsyncTest test = new AsyncTest();
+        {
+            Console.WriteLine("Program类中的Main()函数的线程ID是{0}", Thread.CurrentThread.ManagedThreadId);//Environment.CurrentManagedThreadId
+            if (Thread.CurrentThread.IsThreadPoolThread)//判断当前线程是否托管在线程池上
+            {
+                Console.WriteLine("Program类中的Main()函数的线程托管于线程池");
+            }
+            else
+            {
+                Console.WriteLine("Program类中的Main()函数的线程没有托管在线程池上");
+            }
+            Console.WriteLine();
 
-            //把Hello 方法分配给委托对象
-            AsyncEventHandler async = test.Hello; //
+            //把Method 方法分配给委托对象
+            AsyncHandler async = AsyncTest.Method; //
 
-            //发起一个异步调用的方法,赋值"Andy Huang", 返回IAsyncResult 对象
-            IAsyncResult result = async.BeginInvoke("Andy Huang", null, null);
+            //发起一个异步调用的方法,返回IAsyncResult 对象
+            IAsyncResult result = async.BeginInvoke(null,null);
 
             //这里会阻碍线程,直到方法执行完毕
-            string val = async.EndInvoke(result);
+            async.EndInvoke(result);
 
-            Console.WriteLine(val);
-            Console.ReadLine(); // 让黑屏等待,不会直接关闭..
+            Console.Read();
         }
     }
 }
