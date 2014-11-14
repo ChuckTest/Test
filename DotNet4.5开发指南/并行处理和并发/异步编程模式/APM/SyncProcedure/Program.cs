@@ -4,25 +4,41 @@ using System.Text;
 using System.Threading;
 namespace SyncProcedure
 {
-    //同步程序的试验
+    static class SyncTest
+    {
+        public static void Method()
+        {
+
+            Console.WriteLine("SyncTest类中的Method()函数的线程ID是{0}", Thread.CurrentThread.ManagedThreadId);//Environment.CurrentManagedThreadId
+            if (Thread.CurrentThread.IsThreadPoolThread)//判断当前线程是否托管在线程池上
+            {
+                Console.WriteLine("SyncTest类中的Method()函数的线程托管于线程池");
+            }
+            else
+            {
+                Console.WriteLine("SyncTest类中的Method()函数的线程没有托管在线程池上");
+            }
+        }
+    }
+
     class Program
     {
-        //平常写的Hello 程序是同一个线程的,而且不是线程池理的线程程序.
         static void Main(string[] args)
         {
-            // 查看当前的线程ID, 是否线程池里面的线程
-            Console.WriteLine("1,Thread ID:#{0},Is PoolThread?{1}",
-Thread.CurrentThread.ManagedThreadId, Thread.CurrentThread.IsThreadPoolThread);
+            Console.WriteLine("Program类中的Main()函数的线程ID是{0}", Thread.CurrentThread.ManagedThreadId);//Environment.CurrentManagedThreadId
+            if (Thread.CurrentThread.IsThreadPoolThread)//判断当前线程是否托管在线程池上
+            {
+                Console.WriteLine("Program类中的Main()函数的线程托管于线程池");
+            }
+            else
+            {
+                Console.WriteLine("Program类中的Main()函数的线程没有托管在线程池上");
+            }
+            Console.WriteLine();
 
-            SyncTest test = new SyncTest();
-            string val = test.Hello("Andy Huang");
-            Console.WriteLine(val);
+            SyncTest.Method();//调用静态类的静态方法
 
-            Console.ReadLine();
-
-            //1,Thread ID:#9,Is PoolThread?False
-            //2,Thread ID:#9,Is PoolThread?False
-            //Hello:Andy Huang
+            Console.Read();//阻塞，确保能看到上面的打印信息
         }
     }
 }
