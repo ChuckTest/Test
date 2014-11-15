@@ -53,6 +53,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ComparingPatterns", "DotNet
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AsyncProcedure", "DotNet4.5开发指南\并行处理和并发\异步编程模式\APM\AsyncProcedure\AsyncProcedure.csproj", "{21D8EBCB-1AC4-4B90-86F2-1ECAB7B14525}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "使用IAsyncResult调用异步方法", "使用IAsyncResult调用异步方法", "{7E21DCD0-4812-4EE1-A1B3-50962BDB40AE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EndOperationNameDemo", "DotNet4.5开发指南\并行处理和并发\异步编程模式\APM\使用IAsyncResult调用异步方法\EndOperationNameDemo\EndOperationNameDemo.csproj", "{696F5EA1-6ABD-4255-A1BA-5206C0F8B1AF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AsyncWaitHandle", "DotNet4.5开发指南\并行处理和并发\异步编程模式\APM\使用IAsyncResult调用异步方法\AsyncWaitHandle\AsyncWaitHandle.csproj", "{BDC62FA7-36A9-44E1-9704-1707FC140891}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Poll", "DotNet4.5开发指南\并行处理和并发\异步编程模式\APM\使用IAsyncResult调用异步方法\Poll\Poll.csproj", "{5AD0A237-C8D1-48A6-86E8-084A481CB980}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -173,6 +181,36 @@ Global
 		{21D8EBCB-1AC4-4B90-86F2-1ECAB7B14525}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{21D8EBCB-1AC4-4B90-86F2-1ECAB7B14525}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{21D8EBCB-1AC4-4B90-86F2-1ECAB7B14525}.Release|x86.ActiveCfg = Release|Any CPU
+		{696F5EA1-6ABD-4255-A1BA-5206C0F8B1AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{696F5EA1-6ABD-4255-A1BA-5206C0F8B1AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{696F5EA1-6ABD-4255-A1BA-5206C0F8B1AF}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{696F5EA1-6ABD-4255-A1BA-5206C0F8B1AF}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{696F5EA1-6ABD-4255-A1BA-5206C0F8B1AF}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{696F5EA1-6ABD-4255-A1BA-5206C0F8B1AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{696F5EA1-6ABD-4255-A1BA-5206C0F8B1AF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{696F5EA1-6ABD-4255-A1BA-5206C0F8B1AF}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{696F5EA1-6ABD-4255-A1BA-5206C0F8B1AF}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{696F5EA1-6ABD-4255-A1BA-5206C0F8B1AF}.Release|x86.ActiveCfg = Release|Any CPU
+		{BDC62FA7-36A9-44E1-9704-1707FC140891}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BDC62FA7-36A9-44E1-9704-1707FC140891}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BDC62FA7-36A9-44E1-9704-1707FC140891}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{BDC62FA7-36A9-44E1-9704-1707FC140891}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{BDC62FA7-36A9-44E1-9704-1707FC140891}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{BDC62FA7-36A9-44E1-9704-1707FC140891}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BDC62FA7-36A9-44E1-9704-1707FC140891}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BDC62FA7-36A9-44E1-9704-1707FC140891}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{BDC62FA7-36A9-44E1-9704-1707FC140891}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{BDC62FA7-36A9-44E1-9704-1707FC140891}.Release|x86.ActiveCfg = Release|Any CPU
+		{5AD0A237-C8D1-48A6-86E8-084A481CB980}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5AD0A237-C8D1-48A6-86E8-084A481CB980}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5AD0A237-C8D1-48A6-86E8-084A481CB980}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{5AD0A237-C8D1-48A6-86E8-084A481CB980}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{5AD0A237-C8D1-48A6-86E8-084A481CB980}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{5AD0A237-C8D1-48A6-86E8-084A481CB980}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5AD0A237-C8D1-48A6-86E8-084A481CB980}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5AD0A237-C8D1-48A6-86E8-084A481CB980}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{5AD0A237-C8D1-48A6-86E8-084A481CB980}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{5AD0A237-C8D1-48A6-86E8-084A481CB980}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -197,5 +235,9 @@ Global
 		{EFE1B46F-232E-49D4-ADBC-9FD3150DAC27} = {A4C6E39E-7215-46AC-8AD1-8EEC0E58FED9}
 		{5708410A-D054-42C3-97AA-940E927796A7} = {23FE8445-6903-466F-88DF-E10FCC2AE7C2}
 		{21D8EBCB-1AC4-4B90-86F2-1ECAB7B14525} = {23FE8445-6903-466F-88DF-E10FCC2AE7C2}
+		{7E21DCD0-4812-4EE1-A1B3-50962BDB40AE} = {23FE8445-6903-466F-88DF-E10FCC2AE7C2}
+		{696F5EA1-6ABD-4255-A1BA-5206C0F8B1AF} = {7E21DCD0-4812-4EE1-A1B3-50962BDB40AE}
+		{BDC62FA7-36A9-44E1-9704-1707FC140891} = {7E21DCD0-4812-4EE1-A1B3-50962BDB40AE}
+		{5AD0A237-C8D1-48A6-86E8-084A481CB980} = {7E21DCD0-4812-4EE1-A1B3-50962BDB40AE}
 	EndGlobalSection
 EndGlobal
