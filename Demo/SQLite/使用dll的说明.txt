@@ -1,0 +1,9 @@
+http://www.cnblogs.com/chucklu/p/4104037.html
+
+1.如果项目中有x86和x64的dll，可以建两个不同的文件夹分别存放，但是千万不要修改掉默认的dll的名字
+System.Data.SQLite.dll
+不要修改dll的名字，比如System.Data.SQLitex86.dll或System.Data.SQLitex64.dll
+不要妄想通过这种方法来区分dll
+ 
+
+2.这个dll是区分x86和x64平台的，务必设置项目的目标平台对应到正确的dll
