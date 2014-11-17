@@ -45,20 +45,21 @@ namespace SQLiteFactoryDemo
         /// </summary>
         /// <param name="providerType">数据库类型</param>
         /// <returns></returns>
-        private static DbProviderFactory ImportDbProviderFactory(DbProviderType providerType) 
+        private static DbProviderFactory ImportDbProviderFactory(DbProviderType providerType)
         {
             string providerName = GetProviderInvariantName(providerType);
-            DbProviderFactory factory = null;   
-            try  
-            {   
+            DbProviderFactory factory = null;
+            try
+            {
                 //从全局程序集中查找   
-                factory = DbProviderFactories.GetFactory(providerName);   
-            }   
-            catch 
-            {   
-                factory = null;    
-            }  
-            return factory;  
+                factory = DbProviderFactories.GetFactory(providerName);
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                factory = null;
+            }
+            return factory;
         }
 
         /// <summary>

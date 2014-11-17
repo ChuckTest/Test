@@ -10,7 +10,14 @@ namespace SQLiteFactoryDemo
     {
         static void Main(string[] args)
         {
-            Method2();
+            try
+            {
+                Method2();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
             Console.Read();
         }
 
@@ -59,13 +66,20 @@ namespace SQLiteFactoryDemo
 
         static void Method2()
         {
-            string connectionString = @"data source=C:\\Users\\Administrator\\Desktop\\20141111_162853.db3";
-            string sql = "select [ChannelID],[ISOpen],[Bridge],[Expression],[Precision],[Sensitivity],[Description],[Unit],ChannelType from [ChannelTable] where [ISOpen]!='0'"; 
-            DbUtility db = new DbUtility(connectionString, DbProviderType.SQLite);
-            DataTable dt = db.ExecuteDataTable(sql, null);
-            Console.WriteLine(dt.Rows.Count);
-            DbDataReader reader = db.ExecuteReader(sql, null); 
-            reader.Close(); 
+            try
+            {
+                string connectionString = @"data source=C:\\Users\\Administrator\\Desktop\\20141115_114314.db3";
+                string sql = "select [ChannelID],[ISOpen],[Bridge],[Expression],[Precision],[Sensitivity],[Description],[Unit],ChannelType from [ChannelTable] ";
+                DbUtility db = new DbUtility(connectionString, DbProviderType.SQLite);
+                DataTable dt = db.ExecuteDataTable(sql, null);
+                Console.WriteLine(dt.Rows.Count);
+                DbDataReader reader = db.ExecuteReader(sql, null);
+                reader.Close();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
     }
 }
