@@ -10,8 +10,9 @@ namespace CreateSQLite
 {
     class Program
     {
-        static string str;
-        static string passwd = "zbm";
+        static string file = string.Empty;
+        static string password = string.Empty;
+
         static void Main(string[] args)
         {
             CreateSQLiteDB();
@@ -22,11 +23,12 @@ namespace CreateSQLite
         {
             try
             {
-                string filePath = Environment.CurrentDirectory;
-                string fileName = string.Format("{0}.db3", DateTime.Now.ToString("yyyyMMdd_HHmmss"));
-                str = filePath + "\\" + fileName;
-                SQLiteConnection.CreateFile(str);
-                SetPassword();
+                string str1 = DateTime.Now.ToString("yyyyMMdd_HHmmss");
+                string str2 = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+                file = str2 + "\\" + str1 + ".db3";
+                SQLiteConnection.CreateFile(file);//单独创建文件或设置某一个文件的密码是可以的，但是两者结合就无法使用
+
+                //SetSQLitePassWord();
             }
             catch (Exception ex)
             {
@@ -34,21 +36,34 @@ namespace CreateSQLite
             }
         }
 
-        static void SetPassword()
+        /// <summary>
+        /// 获取数据库连接字符串
+        /// </summary>
+        /// <returns></returns>
+        public static string GetConnectString()
         {
             SQLiteConnectionStringBuilder s = new SQLiteConnectionStringBuilder();
-            s.DataSource = str;
-            s.Password = passwd;
+            s.DataSource = file;
+            s.Password = password;
+            return s.ToString();
+        }
 
-            //SQLiteConnection conn = new SQLiteConnection(s.ToString());
-            //conn.Open();
-            //conn.ChangePassword(passwd);
-            //conn.Close();
-
-            SQLiteConnection conn = new SQLiteConnection(s.ToString());
-            conn.Open();
-            conn.ChangePassword(passwd);
-            conn.Close();
+        /// <summary>
+        /// 给数据库设置密码
+        /// </summary>
+        private static void SetSQLitePassWord()
+        {
+            try
+            {
+                SQLiteConnection conn = new SQLiteConnection(GetConnectString());
+                conn.Open();
+                conn.ChangePassword(password);
+                conn.Close();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
     }
 }
