@@ -20,7 +20,7 @@ namespace EndInvokeDemo
 
             Console.WriteLine("Main thread {0} does some work", Thread.CurrentThread.ManagedThreadId);
 
-            string returnValue = caller.EndInvoke(out threadId,result);//结束异步调用
+            string returnValue = caller.EndInvoke(out threadId,result);//结束异步调用  
 
             Console.WriteLine("The call executed on thread {0},with return value \"{1}\"", threadId, returnValue);//异步操作的线程托管于线程池的
 
