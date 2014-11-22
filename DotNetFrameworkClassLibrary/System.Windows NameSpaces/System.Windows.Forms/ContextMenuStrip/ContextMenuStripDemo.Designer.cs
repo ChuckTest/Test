@@ -41,19 +41,19 @@
             this.AddToolStripMenuItem,
             this.DelToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(153, 70);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(101, 48);
             // 
             // AddToolStripMenuItem
             // 
             this.AddToolStripMenuItem.Name = "AddToolStripMenuItem";
-            this.AddToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.AddToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
             this.AddToolStripMenuItem.Text = "新增";
             this.AddToolStripMenuItem.Click += new System.EventHandler(this.AddToolStripMenuItem_Click);
             // 
             // DelToolStripMenuItem
             // 
             this.DelToolStripMenuItem.Name = "DelToolStripMenuItem";
-            this.DelToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.DelToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
             this.DelToolStripMenuItem.Text = "删除";
             this.DelToolStripMenuItem.Click += new System.EventHandler(this.DelToolStripMenuItem_Click);
             // 
@@ -65,7 +65,7 @@
             this.ContextMenuStrip = this.contextMenuStrip1;
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Form1";
+            this.Text = "右键菜单测试";
             this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
 

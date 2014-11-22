@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{1007D93B-2CBE-4F11-88CC-791D2F97F87A}</ProjectGuid>
+    <ProjectGuid>{D3F36583-55BB-4BA6-A7FD-623F77F9743B}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ContextMenuStrip</RootNamespace>
-    <AssemblyName>ContextMenuStrip</AssemblyName>
+    <RootNamespace>ProgressBarDemo</RootNamespace>
+    <AssemblyName>ProgressBarDemo</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -44,16 +44,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ContextMenuStripDemo.cs">
+    <Compile Include="ProgressBarForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ContextMenuStripDemo.Designer.cs">
-      <DependentUpon>ContextMenuStripDemo.cs</DependentUpon>
+    <Compile Include="ProgressBarForm.Designer.cs">
+      <DependentUpon>ProgressBarForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="ContextMenuStripDemo.resx">
-      <DependentUpon>ContextMenuStripDemo.cs</DependentUpon>
+    <EmbeddedResource Include="ProgressBarForm.resx">
+      <DependentUpon>ProgressBarForm.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
