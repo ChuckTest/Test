@@ -13,6 +13,8 @@ namespace WaitHandleDemo
     {
         static void Main()
         {
+            AsyncDemo.JudgeThread(System.Reflection.MethodBase.GetCurrentMethod().Name, Thread.CurrentThread);
+
             int threadId = 0;
 
             AsyncDemo ad = new AsyncDemo();

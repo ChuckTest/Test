@@ -8,6 +8,7 @@ namespace EndInvokeDemo
     {
         public static void Main()
         {
+            AsyncDemo.JudgeThread(System.Reflection.MethodBase.GetCurrentMethod().Name, Thread.CurrentThread);
             int threadId;
 
             AsyncDemo ad = new AsyncDemo();//创建一个类的实例
