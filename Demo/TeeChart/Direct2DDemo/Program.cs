@@ -16,7 +16,8 @@ namespace Direct2DDemo
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new SpeedDemo());
+            //Application.Run(new SpeedDemo());
+            Application.Run(new SignalThroughOut());
         }
     }
 }

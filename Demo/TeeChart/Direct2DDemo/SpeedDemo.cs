@@ -45,7 +45,7 @@ namespace Direct2DDemo
         /// <summary>
         /// 初始化图表的属性
         /// </summary>
-        protected virtual void InitializeCharts()
+        protected void InitializeCharts()
         {
             tChart.Aspect.View3D = false;
 
@@ -217,7 +217,7 @@ namespace Direct2DDemo
                 D2D.TextRenderingHint = System.Drawing.Text.TextRenderingHint.ClearTypeGridFit;
                 D2D.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;//抗锯齿
             }
-            else
+            //else
             {
                 D2D.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SingleBitPerPixel;
                 D2D.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighSpeed;//不抗锯齿
