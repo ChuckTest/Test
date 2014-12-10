@@ -115,6 +115,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "匿名函数", "匿名函�
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeeChartDemo", "Demo\TeeChart\TeeChartDemo\TeeChartDemo.csproj", "{E554F038-5E57-49CA-B20C-52A15BF0F61B}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "匿名方法", "匿名方法", "{8D1EB312-C736-42FD-826A-8173F22FB20D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Lambda表达式", "Lambda表达式", "{5CFBB444-9734-41A7-A6E8-399B1C6A3CDF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EvolutionOfDelegates", "CSharp编程指南\语句表达式运算符\匿名函数\EvolutionOfDelegates\EvolutionOfDelegates.csproj", "{F0CED6A6-A47D-4060-826D-8A5E6B11C77D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -415,6 +421,16 @@ Global
 		{E554F038-5E57-49CA-B20C-52A15BF0F61B}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{E554F038-5E57-49CA-B20C-52A15BF0F61B}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{E554F038-5E57-49CA-B20C-52A15BF0F61B}.Release|x86.ActiveCfg = Release|Any CPU
+		{F0CED6A6-A47D-4060-826D-8A5E6B11C77D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F0CED6A6-A47D-4060-826D-8A5E6B11C77D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F0CED6A6-A47D-4060-826D-8A5E6B11C77D}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{F0CED6A6-A47D-4060-826D-8A5E6B11C77D}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{F0CED6A6-A47D-4060-826D-8A5E6B11C77D}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{F0CED6A6-A47D-4060-826D-8A5E6B11C77D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F0CED6A6-A47D-4060-826D-8A5E6B11C77D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F0CED6A6-A47D-4060-826D-8A5E6B11C77D}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{F0CED6A6-A47D-4060-826D-8A5E6B11C77D}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{F0CED6A6-A47D-4060-826D-8A5E6B11C77D}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -470,5 +486,8 @@ Global
 		{E554F038-5E57-49CA-B20C-52A15BF0F61B} = {3EF0DF6C-0A90-4879-9E19-92839FCEB8BB}
 		{5EF86848-BBA2-4903-9D9B-78AFD0C0EC83} = {2DB460DE-6255-4D31-9C3C-94E3533E3B9D}
 		{3888CE7E-DFB0-492C-AB20-53798FD9BE37} = {5EF86848-BBA2-4903-9D9B-78AFD0C0EC83}
+		{8D1EB312-C736-42FD-826A-8173F22FB20D} = {3888CE7E-DFB0-492C-AB20-53798FD9BE37}
+		{5CFBB444-9734-41A7-A6E8-399B1C6A3CDF} = {3888CE7E-DFB0-492C-AB20-53798FD9BE37}
+		{F0CED6A6-A47D-4060-826D-8A5E6B11C77D} = {3888CE7E-DFB0-492C-AB20-53798FD9BE37}
 	EndGlobalSection
 EndGlobal
