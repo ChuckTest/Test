@@ -28,12 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.tChart1 = new Steema.TeeChart.TChart();
+            this.fastLine1 = new Steema.TeeChart.Styles.FastLine();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.fastLine1 = new Steema.TeeChart.Styles.FastLine();
+            this.axis1 = new Steema.TeeChart.Axis(this.components);
+            this.line2 = new Steema.TeeChart.Styles.Line();
             this.SuspendLayout();
             // 
             // tChart1
@@ -43,7 +46,6 @@
             // 
             this.tChart1.Aspect.ColorPaletteIndex = -1;
             this.tChart1.Aspect.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighSpeed;
-            this.tChart1.Aspect.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault;
             this.tChart1.Aspect.View3D = false;
             // 
             // 
@@ -84,6 +86,7 @@
             // 
             // 
             this.tChart1.Axes.Bottom.Title.Font.Name = "Arial";
+            this.tChart1.Axes.Custom.Add(this.axis1);
             // 
             // 
             // 
@@ -164,6 +167,7 @@
             // 
             this.tChart1.Axes.Left.AxisPen.Color = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.tChart1.Axes.Left.AxisPen.Visible = false;
+            this.tChart1.Axes.Left.EndPosition = 50D;
             // 
             // 
             // 
@@ -342,6 +346,7 @@
             this.tChart1.Panel.Shadow.Height = 0;
             this.tChart1.Panel.Shadow.Width = 0;
             this.tChart1.Series.Add(this.fastLine1);
+            this.tChart1.Series.Add(this.line2);
             this.tChart1.Size = new System.Drawing.Size(963, 527);
             this.tChart1.TabIndex = 0;
             // 
@@ -417,6 +422,43 @@
             this.tChart1.Click += new System.EventHandler(this.tChart1_Click);
             this.tChart1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.tChart1_MouseDown);
             // 
+            // fastLine1
+            // 
+            this.fastLine1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(102)))), ((int)(((byte)(163)))));
+            this.fastLine1.ColorEach = false;
+            // 
+            // 
+            // 
+            this.fastLine1.LinePen.Color = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(102)))), ((int)(((byte)(163)))));
+            // 
+            // 
+            // 
+            // 
+            // 
+            // 
+            // 
+            // 
+            // 
+            this.fastLine1.Marks.Brush.Gradient.EndColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(0)))));
+            this.fastLine1.Marks.Brush.Gradient.MiddleColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.fastLine1.Marks.Brush.Gradient.SigmaFocus = 0F;
+            this.fastLine1.Marks.Brush.Gradient.SigmaScale = 0F;
+            this.fastLine1.Marks.Brush.Gradient.StartColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            // 
+            // 
+            // 
+            this.fastLine1.Marks.Font.Name = "Arial";
+            this.fastLine1.Title = "fastLine1";
+            this.fastLine1.TreatNulls = Steema.TeeChart.Styles.TreatNullsStyle.Ignore;
+            // 
+            // 
+            // 
+            this.fastLine1.XValues.DataMember = "X";
+            // 
+            // 
+            // 
+            this.fastLine1.YValues.DataMember = "Y";
+            // 
             // button1
             // 
             this.button1.Location = new System.Drawing.Point(519, 13);
@@ -448,53 +490,41 @@
             this.checkBox1.UseVisualStyleBackColor = true;
             this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
-            // fastLine1
+            // axis1
             // 
-            this.fastLine1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(102)))), ((int)(((byte)(163)))));
-            this.fastLine1.ColorEach = false;
+            this.axis1.Horizontal = false;
+            this.axis1.OtherSide = false;
+            this.axis1.StartPosition = 50D;
             // 
-            // 
-            // 
-            this.fastLine1.LinePen.Color = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(102)))), ((int)(((byte)(163)))));
-            // 
+            // line2
             // 
             // 
             // 
             // 
-            // 
-            this.fastLine1.Marks.Brush.Color = System.Drawing.Color.LightYellow;
-            // 
-            // 
-            // 
-            this.fastLine1.Marks.Brush.Gradient.EndColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(0)))));
-            this.fastLine1.Marks.Brush.Gradient.MiddleColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.fastLine1.Marks.Brush.Gradient.SigmaFocus = 0F;
-            this.fastLine1.Marks.Brush.Gradient.SigmaScale = 0F;
-            this.fastLine1.Marks.Brush.Gradient.StartColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.line2.Brush.Color = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(156)))), ((int)(((byte)(53)))));
+            this.line2.Color = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(156)))), ((int)(((byte)(53)))));
+            this.line2.ColorEach = false;
+            this.line2.CustomVertAxis = this.axis1;
             // 
             // 
             // 
-            this.fastLine1.Marks.Font.Name = "Arial";
+            this.line2.LinePen.Color = System.Drawing.Color.FromArgb(((int)(((byte)(146)))), ((int)(((byte)(94)))), ((int)(((byte)(32)))));
             // 
             // 
             // 
+            this.line2.Pointer.SizeDouble = 0D;
+            this.line2.Pointer.SizeUnits = Steema.TeeChart.Styles.PointerSizeUnits.Pixels;
+            this.line2.Title = "line1";
+            this.line2.VertAxis = Steema.TeeChart.Styles.VerticalAxis.Custom;
             // 
             // 
             // 
-            this.fastLine1.Marks.Shadow.Brush.Color = System.Drawing.Color.Gray;
-            this.fastLine1.Marks.Shadow.Height = 1;
-            this.fastLine1.Marks.Shadow.Visible = true;
-            this.fastLine1.Marks.Shadow.Width = 1;
-            this.fastLine1.Title = "fastLine1";
-            this.fastLine1.TreatNulls = Steema.TeeChart.Styles.TreatNullsStyle.Ignore;
+            this.line2.XValues.DataMember = "X";
+            this.line2.XValues.Order = Steema.TeeChart.Styles.ValueListOrder.Ascending;
             // 
             // 
             // 
-            this.fastLine1.XValues.DataMember = "X";
-            // 
-            // 
-            // 
-            this.fastLine1.YValues.DataMember = "Y";
+            this.line2.YValues.DataMember = "Y";
             // 
             // Form1
             // 
@@ -520,6 +550,8 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.CheckBox checkBox1;
         private Steema.TeeChart.Styles.FastLine fastLine1;
+        private Steema.TeeChart.Axis axis1;
+        private Steema.TeeChart.Styles.Line line2;
 
 
     }
