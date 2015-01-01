@@ -31,12 +31,12 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.tChart1 = new Steema.TeeChart.TChart();
+            this.axis1 = new Steema.TeeChart.Axis(this.components);
             this.fastLine1 = new Steema.TeeChart.Styles.FastLine();
+            this.line2 = new Steema.TeeChart.Styles.Line();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.axis1 = new Steema.TeeChart.Axis(this.components);
-            this.line2 = new Steema.TeeChart.Styles.Line();
             this.SuspendLayout();
             // 
             // tChart1
@@ -58,6 +58,7 @@
             // 
             this.tChart1.Axes.Bottom.AxisPen.Color = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.tChart1.Axes.Bottom.AxisPen.Visible = false;
+            this.tChart1.Axes.Bottom.EndPosition = 79D;
             // 
             // 
             // 
@@ -70,6 +71,7 @@
             // 
             // 
             this.tChart1.Axes.Bottom.Labels.Font.Name = "Arial";
+            this.tChart1.Axes.Bottom.PositionUnits = Steema.TeeChart.PositionUnits.Pixels;
             // 
             // 
             // 
@@ -330,6 +332,12 @@
             // 
             // 
             // 
+            this.tChart1.Panel.Bevel.Outer = Steema.TeeChart.Drawing.BevelStyles.Lowered;
+            this.tChart1.Panel.Bevel.Width = 23;
+            this.tChart1.Panel.BevelWidth = 23;
+            // 
+            // 
+            // 
             // 
             // 
             // 
@@ -340,6 +348,17 @@
             this.tChart1.Panel.Brush.Gradient.StartColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.tChart1.Panel.Brush.Gradient.UseMiddle = false;
             this.tChart1.Panel.Brush.Gradient.Visible = false;
+            this.tChart1.Panel.MarginBottom = 0D;
+            this.tChart1.Panel.MarginLeft = 0D;
+            this.tChart1.Panel.MarginRight = 0D;
+            this.tChart1.Panel.MarginTop = 0D;
+            // 
+            // 
+            // 
+            this.tChart1.Panel.Pen.DashCap = System.Drawing.Drawing2D.DashCap.Triangle;
+            this.tChart1.Panel.Pen.EndCap = System.Drawing.Drawing2D.LineCap.Square;
+            this.tChart1.Panel.Pen.Style = System.Drawing.Drawing2D.DashStyle.DashDotDot;
+            this.tChart1.Panel.Pen.Width = 9;
             // 
             // 
             // 
@@ -422,6 +441,12 @@
             this.tChart1.Click += new System.EventHandler(this.tChart1_Click);
             this.tChart1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.tChart1_MouseDown);
             // 
+            // axis1
+            // 
+            this.axis1.Horizontal = false;
+            this.axis1.OtherSide = false;
+            this.axis1.StartPosition = 50D;
+            // 
             // fastLine1
             // 
             this.fastLine1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(102)))), ((int)(((byte)(163)))));
@@ -459,6 +484,36 @@
             // 
             this.fastLine1.YValues.DataMember = "Y";
             // 
+            // line2
+            // 
+            // 
+            // 
+            // 
+            this.line2.Brush.Color = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(156)))), ((int)(((byte)(53)))));
+            this.line2.Color = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(156)))), ((int)(((byte)(53)))));
+            this.line2.ColorEach = false;
+            this.line2.CustomVertAxis = this.axis1;
+            // 
+            // 
+            // 
+            this.line2.LinePen.Color = System.Drawing.Color.FromArgb(((int)(((byte)(146)))), ((int)(((byte)(94)))), ((int)(((byte)(32)))));
+            // 
+            // 
+            // 
+            this.line2.Pointer.SizeDouble = 0D;
+            this.line2.Pointer.SizeUnits = Steema.TeeChart.Styles.PointerSizeUnits.Pixels;
+            this.line2.Title = "line1";
+            this.line2.VertAxis = Steema.TeeChart.Styles.VerticalAxis.Custom;
+            // 
+            // 
+            // 
+            this.line2.XValues.DataMember = "X";
+            this.line2.XValues.Order = Steema.TeeChart.Styles.ValueListOrder.Ascending;
+            // 
+            // 
+            // 
+            this.line2.YValues.DataMember = "Y";
+            // 
             // button1
             // 
             this.button1.Location = new System.Drawing.Point(519, 13);
@@ -489,42 +544,6 @@
             this.checkBox1.Text = "平滑";
             this.checkBox1.UseVisualStyleBackColor = true;
             this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
-            // 
-            // axis1
-            // 
-            this.axis1.Horizontal = false;
-            this.axis1.OtherSide = false;
-            this.axis1.StartPosition = 50D;
-            // 
-            // line2
-            // 
-            // 
-            // 
-            // 
-            this.line2.Brush.Color = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(156)))), ((int)(((byte)(53)))));
-            this.line2.Color = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(156)))), ((int)(((byte)(53)))));
-            this.line2.ColorEach = false;
-            this.line2.CustomVertAxis = this.axis1;
-            // 
-            // 
-            // 
-            this.line2.LinePen.Color = System.Drawing.Color.FromArgb(((int)(((byte)(146)))), ((int)(((byte)(94)))), ((int)(((byte)(32)))));
-            // 
-            // 
-            // 
-            this.line2.Pointer.SizeDouble = 0D;
-            this.line2.Pointer.SizeUnits = Steema.TeeChart.Styles.PointerSizeUnits.Pixels;
-            this.line2.Title = "line1";
-            this.line2.VertAxis = Steema.TeeChart.Styles.VerticalAxis.Custom;
-            // 
-            // 
-            // 
-            this.line2.XValues.DataMember = "X";
-            this.line2.XValues.Order = Steema.TeeChart.Styles.ValueListOrder.Ascending;
-            // 
-            // 
-            // 
-            this.line2.YValues.DataMember = "Y";
             // 
             // Form1
             // 

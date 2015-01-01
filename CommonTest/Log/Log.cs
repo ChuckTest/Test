@@ -12,7 +12,7 @@ namespace CommonTest.Log
         /// <summary>
         /// 默认的保存文件路径为当前路径
         /// </summary>
-        protected string m_filepath = Environment.CurrentDirectory;
+        protected string m_filepath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)+@"\Log";
 
         private bool m_enablelog = true;
 
