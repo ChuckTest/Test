@@ -116,18 +116,25 @@ namespace AsyncSocket
         // for connection requests on</param> 
         public void Start(IPEndPoint localEndPoint)
         {
-            // create the socket which listens for incoming connections
-            listenSocket = new Socket(localEndPoint.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
-            listenSocket.Bind(localEndPoint);
-            // start the server with a listen backlog of 100 connections
-            listenSocket.Listen(100);
+            try
+            {
+                // create the socket which listens for incoming connections
+                listenSocket = new Socket(localEndPoint.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
+                listenSocket.Bind(localEndPoint);
+                // start the server with a listen backlog of 100 connections
+                listenSocket.Listen(100);
 
-            // post accepts on the listening socket
-            StartAccept(null);
+                // post accepts on the listening socket
+                StartAccept(null);
 
-            //Console.WriteLine("{0} connected sockets with one outstanding receive posted to each....press any key", m_outstandingReadCount);
-            Console.WriteLine("Press any key to terminate the server process....");
-            Console.ReadKey();
+                //Console.WriteLine("{0} connected sockets with one outstanding receive posted to each....press any key", m_outstandingReadCount);
+                Console.WriteLine("Press any key to stop the server");
+                Console.ReadKey();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
 
@@ -169,8 +176,8 @@ namespace AsyncSocket
         private void ProcessAccept(SocketAsyncEventArgs e)
         {
             Interlocked.Increment(ref m_numConnectedSockets);
-            Console.WriteLine("Client connection accepted. There are {0} clients connected to the server",
-                m_numConnectedSockets);
+            Console.WriteLine("[{1}]  Client connection accepted. There are {0} clients connected to the server",
+                m_numConnectedSockets, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
 
             // Get the socket for the accepted client connection and put it into the  
             //ReadEventArg object user token
@@ -222,7 +229,8 @@ namespace AsyncSocket
             {
                 //increment the count of the total bytes receive by the server
                 Interlocked.Add(ref m_totalBytesRead, e.BytesTransferred);
-                Console.WriteLine("The server has read a total of {0} bytes", m_totalBytesRead);
+                Console.WriteLine("[{1}]  The server has read a total of {0} bytes", 
+                    m_totalBytesRead, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
 
                 //echo the data received back to the client
                 //无需调整缓冲区的大小,目前默认的缓冲区大小为10,
@@ -289,7 +297,9 @@ namespace AsyncSocket
             Interlocked.Decrement(ref m_numConnectedSockets);
 
             m_maxNumberAcceptedClients.Release();
-            Console.WriteLine("A client has been disconnected from the server. There are {0} clients connected to the server", m_numConnectedSockets);
+            Console.WriteLine(@"[{0}]  A client has been disconnected from the server. 
+            There are {1} clients connected to the server", 
+                DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"),m_numConnectedSockets);
 
             // Free the SocketAsyncEventArg so they can be reused by another client
             m_readWritePool.Push(e);//将空闲的套接字压入m_readWritePool
