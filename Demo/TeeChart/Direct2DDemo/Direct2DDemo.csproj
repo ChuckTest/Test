@@ -37,10 +37,10 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="TeeChart">
-      <HintPath>C:\Program Files (x86)\Steema Software\Steema TeeChart for .NET 2014 Evaluation 4.1.2014.08125\Examples\DemoProjectDirect2D\References\TeeChart.dll</HintPath>
+      <HintPath>..\Dll\TeeChart.dll</HintPath>
     </Reference>
     <Reference Include="TeeChart.Direct2D">
-      <HintPath>C:\Program Files (x86)\Steema Software\Steema TeeChart for .NET 2014 Evaluation 4.1.2014.08125\Examples\DemoProjectDirect2D\References\TeeChart.Direct2D.dll</HintPath>
+      <HintPath>..\Dll\TeeChart.Direct2D.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
