@@ -34,11 +34,11 @@ namespace ConcurrentDictionaryDemo
                 Student stu2 = GetStudentByID(2);
                 if (stu2 == null)
                 {
-                    Console.WriteLine(string.Format("学号为2的学生的名字是{0},成绩是{1}", stu2.Name, stu2.Score));
+                    Console.WriteLine(string.Format("学号为2的学生不存在"));
                 }
                 else
                 {
-                    Console.WriteLine(string.Format("学号为2的学生不存在"));
+                    Console.WriteLine(string.Format("学号为2的学生的名字是{0},成绩是{1}", stu2.Name, stu2.Score));
                 }
 
                 Console.WriteLine("FirstOrDefault测试结束");
