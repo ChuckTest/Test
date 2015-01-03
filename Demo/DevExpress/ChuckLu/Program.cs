@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+using DevExpress.Skins;
+
 using ChuckLu.UI;
 
 namespace ChuckLu
@@ -18,6 +20,9 @@ namespace ChuckLu
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+
+            SkinManager.EnableFormSkins();//DevExpress.Utils.v11.1.dll中的方法
+
             Application.Run(new MainForm());
         }
     }
