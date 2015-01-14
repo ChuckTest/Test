@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ArrivalsMonitor.cs" />
     <Compile Include="BaggageHandler.cs" />
     <Compile Include="BaggageInfo.cs" />
     <Compile Include="Program.cs" />

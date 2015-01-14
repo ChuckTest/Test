@@ -49,6 +49,9 @@ namespace Observer
 
         /// <summary>
         /// 第一点和第四点
+        /// 
+        /// 一旦有观察者订阅之后，就给观察者发送当前flights中存储的所有信息
+        /// 
         /// The provider must implement a single method, IObservable<T>.Subscribe, 
         /// which is called by observers that wish to receive notifications from the provider.
         /// 
@@ -58,13 +61,13 @@ namespace Observer
         /// </summary>
         /// <param name="observer"></param>
         /// <returns>The provider's Subscribe method returns an IDisposable implementation that enables observers to stop receiving notifications before the OnCompleted method is called. </returns>
-        internal IDisposable Subscribe(IObserver<BaggageInfo> observer)
+        public IDisposable Subscribe(IObserver<BaggageInfo> observer)
         {
             //检查observer是否已经添加到集合中，如果没有就添加
             if (observers.Contains(observer) == false)
             {
                 observers.Add(observer);
-                //向observer提供存在的数据
+                //向observer提供所有已经存在的数据
                 foreach (var item in flights)
                 {
                     observer.OnNext(item);
@@ -79,43 +82,56 @@ namespace Observer
         }
 
         /// <summary>
-        /// The overloaded BaggageHandler.BaggageStatus method can be called to indicate that baggage from a flight either is being unloaded or is no longer being unloaded.  
-        /// In the first case, the method is passed a flight number, the airport from which the flight originated, and the carousel where baggage is being unloaded. 
+        /// The overloaded BaggageHandler.BaggageStatus method can be called 
+        /// to indicate that baggage from a flight either is being unloaded or is no longer being unloaded.  
+        /// 
+        /// In the first case, the method is passed 
+        /// a flight number, 
+        /// the airport from which the flight originated, 
+        /// and the carousel where baggage is being unloaded. //正在卸货行李的传送带编号
         /// </summary>
-        /// <param name="flight"></param>
-        /// <param name="from"></param>
-        /// <param name="carousel"></param>
+        /// <param name="flight">航班编号</param>
+        /// <param name="from">起航的城市</param>
+        /// <param name="carousel">传送带的编号</param>
         internal void BaggageStatus(int flight, string from, int carousel)
         {
             var info = new BaggageInfo(flight, from, carousel);
-            
-            if (carousel > 0 && flights.Contains(info) == false)
-            {   
-                // Carousel is assigned, so add new info object to list. 
-                flights.Add(info);
-                foreach (var item in observers)
+
+            if (carousel > 0 )//行李尚未取走，并且没有记录过此行李的信息
+            {
+                if (flights.Contains(info) == false)
                 {
-                    item.OnNext(info);
+                    // Carousel is assigned, so add new info object to list. 
+                    flights.Add(info);
+                    Console.WriteLine(string.Format("新行李抵达,航班编号{0},起航城市{1},传送带编号{2}", flight, from, carousel));
+                    foreach (var item in observers)
+                    {
+                        if (item is ArrivalsMonitor)
+                        {
+                            Console.WriteLine(string.Format("通知{0}新行李抵达", ((ArrivalsMonitor)item).Name));
+                        }
+                        item.OnNext(info);//通知观察者们新加的行李 carousel>0
+                    }
                 }
             }
-            else if (carousel == 0)
+            else if (carousel == 0)//表示行李已经被取走
             {
                 // Baggage claim for flight is done 
                 var flightsToRemove = new List<BaggageInfo>();
-                foreach (var flightItem in flights)
+                foreach (var flightItem in flights)//遍历flights查找行李
                 {
-                    if (flightItem.FlightNumber == flight)
+                    if (flightItem.FlightNumber == flight)//查找同一个航班的行李
                     {
                         flightsToRemove.Add(flightItem);
-                        foreach (var observerItem in observers)
+                        foreach (var observerItem in observers)//遍历所有的观察者
                         {
-                            observerItem.OnNext(info);
+                            observerItem.OnNext(info);//将取走的行李通知给所有的观察者  carousel==0
                         }
                     }
                 }
-                foreach (var flightToRemove in flightsToRemove)
+                foreach (var flightToRemove in flightsToRemove)//遍历所有待移除的行李
                 {
-                    flights.Remove(flightToRemove);
+                    flights.Remove(flightToRemove);//移除行李
                 }
                 flightsToRemove.Clear();
             }
@@ -124,17 +140,22 @@ namespace Observer
         /// <summary>
         /// Called to indicate all baggage is now unloaded. 
         /// 
-        /// The overloaded BaggageHandler.BaggageStatus method can be called to indicate that baggage from a flight either is being unloaded or is no longer being unloaded.  
+        /// The overloaded BaggageHandler.BaggageStatus method can be called 
+        /// to indicate that baggage from a flight either is being unloaded or is no longer being unloaded.  
+        /// 
         /// In the second case, the method is passed only a flight number. 
         /// For baggage that is being unloaded, the method checks whether the BaggageInfo information passed to the method exists in the flights collection. 
         /// If it does not, the method adds the information and calls each observer's OnNext method.
+        /// 
         /// For flights whose baggage is no longer being unloaded, the method checks whether information on that flight is stored in the flights collection. 
         /// If it is, the method calls each observer's OnNext method and removes the BaggageInfo object from the flights collection.
         /// </summary>
         /// <param name="flight"></param>
         internal void BaggageStatus(int flight)
         {
+            Console.WriteLine(string.Format("准备将航班{0}所有行李卸货",flight));
             BaggageStatus(flight, string.Empty, 0);
+            Console.WriteLine(string.Format("航班{0}所有行李卸货成功", flight));
         }
 
         /// <summary>
