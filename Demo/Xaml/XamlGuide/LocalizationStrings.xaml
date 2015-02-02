@@ -1,0 +1,10 @@
+﻿<!--添加资源字典，在ResourceDictionary元素中定义资源-->
+<!--为了使资源字典可用于应用程序，必须把它添加到资源中-->
+<!--如果资源字典只需要在一个窗口或一个特定的wpf元素中使用，就可以把它添加到该窗口或wpf元素的资源集合中-->
+<!--如果多个窗口需要同一个资源字典，就可以把该资源字典添加到application元素的app.xaml文件中，从而它可以应用于整个应用程序-->
+<ResourceDictionary 
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:system="clr-namespace:System;assembly=mscorlib"><!--别名system设置为程序集mscorlib中的clr-namespace System-->
+    <system:String x:Key="message">English Message</system:String>
+</ResourceDictionary>

@@ -24,5 +24,14 @@ namespace XamlGuide
         {
             InitializeComponent();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show(this.Resources["message"] as string);//资源是用窗口定义的，所以使用windows类的resources属性的索引器访问该资源
+
+            //FindResource方法以层次结构的方式来搜索资源 逐层搜索，直到能找到为止button-->grid-->window-->application[mainwindows.cs]
+            MessageBox.Show(this.FindResource("message") as string);
+
+        }
     }
 }
