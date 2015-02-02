@@ -1,17 +1,17 @@
-﻿<Window x:Class="XamlGuide.MainWindow"
+﻿<Window x:Uid="Window_1" x:Class="XamlGuide.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="MainWindow" Height="240" Width="500" WindowStartupLocation="CenterScreen">
     <!--Grid Height="500" Width="600">-->
     <!--这里把资源字典添加到主窗口的资源中-->
     <Window.Resources>
-        <ResourceDictionary>
+        <ResourceDictionary x:Uid="ResourceDictionary_1">
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="LocalizationStrings.xaml"/>
+                <ResourceDictionary x:Uid="ResourceDictionary_2" Source="LocalizationStrings.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
-    <Grid>
-        <Button Content="Button" Margin="30,20,30,20" Click="Button_Click"/>
+    <Grid x:Uid="Grid_1">
+        <Button x:Uid="button1" Name="button1" Content="Button" Margin="30,20,30,20" Click="Button_Click"/>
     </Grid>
 </Window>
