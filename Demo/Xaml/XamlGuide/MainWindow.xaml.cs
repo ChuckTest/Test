@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Globalization;
+using System.Threading;
 
 namespace XamlGuide
 {
@@ -23,6 +25,14 @@ namespace XamlGuide
         public MainWindow()
         {
             InitializeComponent();
+            InitCulture();
+        }
+
+        private void InitCulture()
+        {
+            CultureInfo ci = new CultureInfo("zh-CN");
+            Thread.CurrentThread.CurrentCulture = ci;
+            Thread.CurrentThread.CurrentUICulture = ci;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
