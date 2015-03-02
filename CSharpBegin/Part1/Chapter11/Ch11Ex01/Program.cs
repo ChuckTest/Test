@@ -25,9 +25,31 @@ namespace Ch11Ex01
             ((Chicken)animalArray[1]).LayEgg();
             Console.WriteLine();
 
+
+
+
             Console.WriteLine("Create an ArrayList type collection of Animal objects and use it:");
             ArrayList animalArrayList = new ArrayList();
+            Cow myCow2 = new Cow("Hayley");
+            animalArrayList.Add(myCow2);
+            animalArrayList.Add(new Chicken("Roy"));
+            foreach (Animal item in animalArrayList)
+            {
+                Console.WriteLine("New {0} object add to ArrayList collection, Name = {1}", item.ToString(), item.Name);
+            }
+            Console.WriteLine("ArrayList collection contains {0} objects.", animalArrayList.Count);
+            ((Animal)animalArrayList[0]).Feed();
+            ((Chicken)animalArrayList[1]).LayEgg();
+            Console.WriteLine();
 
+            Console.WriteLine("Additional manipulation of ArrayList:");
+            animalArrayList.RemoveAt(0);
+            ((Animal)animalArrayList[0]).Feed();
+            animalArrayList.AddRange(animalArray);
+            ((Chicken)animalArrayList[2]).LayEgg();
+            Console.WriteLine("The animal called {0} is at index", myCow1.Name, animalArrayList.IndexOf(myCow1));
+            myCow1.Name = "Janice";
+            Console.WriteLine("The animal is calles {0}", ((Animal)animalArrayList[1]).Name);
 
             Console.ReadKey();
         }
