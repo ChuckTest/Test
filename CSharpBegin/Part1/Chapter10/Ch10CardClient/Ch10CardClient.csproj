@@ -48,9 +48,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Ch10CardLib\Ch10CardLib.csproj">
-      <Project>{2b25de39-5627-465e-b8f4-016f9eddf360}</Project>
-      <Name>Ch10CardLib</Name>
+    <ProjectReference Include="..\..\Chapter11\Ch11CardLib\Ch11CardLib.csproj">
+      <Project>{3f4eae83-101f-4cbf-83fe-812a8461fb9b}</Project>
+      <Name>Ch11CardLib</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
