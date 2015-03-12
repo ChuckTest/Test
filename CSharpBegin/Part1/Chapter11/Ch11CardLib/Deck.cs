@@ -7,17 +7,16 @@ namespace Ch11CardLib
 {
     public class Deck
     {
-        private Card[] cards;
+        private Cards cards = new Cards();
 
         public Deck()
         {
-            cards = new Card[52];
             //对花色和数字的所有组合进行迭代
             for (int suitVal = 0; suitVal < 4; suitVal++)
             {
                 for (int rankVal = 1; rankVal <= 13; rankVal++)
                 {
-                    cards[suitVal * 13 + rankVal - 1] = new Card((Suit)suitVal, (Rank)rankVal);//创建新卡牌
+                    cards.Add(new Card((Suit)suitVal, (Rank)rankVal));
                 }
             }
 
@@ -40,26 +39,27 @@ namespace Ch11CardLib
         /// </summary>
         public void Shuffle()
         {
-            Card[] newDeck = new Card[52];//临时的扑克牌数组
+            Cards newDeck = new Cards();//临时的扑克牌数组
             bool[] assigned = new bool[52];
             Random sourceGen = new Random();
+            //将cards中随机的一张牌添加到newDeck的开头
             for (int i = 0; i < 52; i++)
             {
-                int destCard = 0;
+                int sourceCard = 0;
                 bool foundCard = false;
                 //while查找没有复制过卡牌的位置
                 while (foundCard == false)
                 {
-                    destCard = sourceGen.Next(52);
-                    if (assigned[destCard] == false)
+                    sourceCard = sourceGen.Next(52);
+                    if (assigned[sourceCard] == false)
                     {
                         foundCard = true;
                     }
                 }
-                assigned[destCard] = true;
-                newDeck[destCard] = cards[i];//将cards数组中的牌复制到临时卡组
+                assigned[sourceCard] = true;
+                newDeck.Add(cards[sourceCard]);//将cards数组中的牌复制到临时卡组
             }
-            newDeck.CopyTo(cards, 0);//不可以使用cards=newDeck，否则的话就用了另一个对象，如果其他地方还保持了对cards引用的话，就会出问题
+            newDeck.CopyTo(cards);//不可以使用cards=newDeck，否则的话就用了另一个对象，如果其他地方还保持了对cards引用的话，就会出问题
         }
     }
 }

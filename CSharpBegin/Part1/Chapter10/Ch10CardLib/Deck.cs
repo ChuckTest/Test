@@ -43,6 +43,7 @@ namespace Ch10CardLib
             Card[] newDeck = new Card[52];//临时的扑克牌数组
             bool[] assigned = new bool[52];
             Random sourceGen = new Random();
+            //将cards中顺序位置的牌，放到newDeck的随机位置上
             for (int i = 0; i < 52; i++)
             {
                 int destCard = 0;
