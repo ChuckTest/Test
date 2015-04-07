@@ -62,6 +62,7 @@ namespace Ch11Ex04
             //只有MyStruct类型的变量本身和该类型的封箱变量与MyStruct兼容，因为不能把引用类型转换为值类型
             object try6 = try5;
 
+            //相当于把子类赋值给父类变量
             object try7 = try4;
 
             Console.WriteLine("Analyzing ClassA type variable:");
