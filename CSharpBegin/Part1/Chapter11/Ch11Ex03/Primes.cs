@@ -34,7 +34,7 @@ namespace Ch11Ex03
             for (long posssiblePrime = min; posssiblePrime <= max; posssiblePrime++)
             {
                 bool isPrime = true;
-                long tmpMax=(long)Math.Floor(Math.Sqrt(posssiblePrime));
+                long tmpMax = (long)Math.Floor(Math.Sqrt(posssiblePrime));
                 for (long possibleFactor = 2; possibleFactor <= tmpMax; possibleFactor++)
                 {
                     long remainderAfterDivision = posssiblePrime % possibleFactor;
