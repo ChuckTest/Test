@@ -17,6 +17,7 @@ namespace Ch12Ex03
         public double? R = null;
         /// <summary>
         /// 极角(单位：度)  逆时针方向为正
+        /// 【书上的极坐标图显示，以纵轴向上方向为极轴,以顺时针为正方向】
         /// </summary>
         public double? Theta = null;
 
