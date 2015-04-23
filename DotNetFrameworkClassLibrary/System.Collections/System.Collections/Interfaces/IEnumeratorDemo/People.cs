@@ -24,7 +24,7 @@ namespace IEnumeratorDemo
         //1.调用集合的GetEnumerator方法，此方法返回一个IEnumerator接口对象
         //2.调用IEnumerator接口对象的MoveNext方法
         //3.如果MoveNext返回值为true，就取IEnumerator接口对象的Current对象的引用，用于foreach循环
-        //4.重复第2和第3步，知道MoveNext返回false的时候停止循环
+        //4.重复第2和第3步，直到MoveNext返回false的时候停止循环
         public IEnumerator GetEnumerator()
         {
             return new PeopleEnum(personArray);
