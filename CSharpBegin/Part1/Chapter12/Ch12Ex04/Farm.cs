@@ -79,5 +79,98 @@ namespace Ch12Ex04
             }
             return cowFarm;
         }
+        #region 方法1
+        /// <summary>
+        /// 泛型运算符  隐式转换
+        /// </summary>
+        /// <param name="farm"></param>
+        /// <returns></returns>
+        public static implicit operator List<Animal>(Farm<T> farm)
+        {
+            List<Animal> result = new List<Animal>();
+            foreach (var item in farm)
+            {
+                result.Add(item);
+            }
+            return result;
+        }
+
+        /// <summary>
+        /// 重载加法运算符  正序
+        /// 依赖于Farm<T>到List<Animal>的转换
+        /// </summary>
+        /// <param name="farm1"></param>
+        /// <param name="farm2"></param>
+        /// <returns></returns>
+        public static Farm<T> operator +(Farm<T> farm1, List<T> farm2)
+        {
+            Farm<T> result = new Farm<T>();
+            foreach (var item in farm1)
+            {
+                result.Animals.Add(item);
+            }
+            foreach (var item in farm2)
+            {
+                if (result.Animals.Contains(item) == false)
+                {
+                    result.Animals.Add(item);
+                }
+            }
+            return result;
+        }
+
+        /// <summary>
+        /// 重载加法运算符  反序
+        /// </summary>
+        /// <param name="farm1"></param>
+        /// <param name="farm2"></param>
+        /// <returns></returns>
+        public static Farm<T> operator +(List<T> farm1,Farm<T> farm2)
+        {
+            return farm2 + farm1;
+        }
+        #endregion 
+
+        #region 方法2
+        /// <summary>
+        /// 重载加法运算符
+        /// 依赖Farm<T>到Farm<Animal>的隐式转换
+        /// </summary>
+        /// <param name="farm1"></param>
+        /// <param name="farm2"></param>
+        /// <returns></returns>
+        public static Farm<T> operator +(Farm<T> farm1,Farm<T> farm2)
+        {
+            Farm<T> result = new Farm<T>();
+            foreach (var item in farm1)
+            {
+                result.Animals.Add(item);
+            }
+            foreach (var item in farm2)
+            {
+                if (result.Contains(item) == false)
+                {
+                    result.Animals.Add(item);
+                }
+            }
+            return result;
+        }
+
+        /// <summary>
+        /// 隐式转换Farm<T为>Farm<Animal>
+        /// 如果T是Cow或者Chicken的话,不能直接转换成Farm<Animal>
+        /// </summary>
+        /// <param name="farm"></param>
+        /// <returns></returns>
+        public static implicit operator Farm<Animal>(Farm<T> farm)
+        {
+            Farm<Animal> result = new Farm<Animal>();
+            foreach (var item in farm)
+            {
+                result.Animals.Add(item);
+            }
+            return result;
+        }
+        #endregion
     }
 }

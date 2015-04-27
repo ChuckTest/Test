@@ -32,6 +32,9 @@ namespace Ch12Ex04
                 }
             }
 
+            //此处的dairyFarm(是Farm<Cow>的实例)隐式转换为List<Animal>,之后由重载的加法运算符处理
+            Farm<Animal> newFarm = farm + dairyFarm;
+
             Console.ReadKey();
         }
     }
