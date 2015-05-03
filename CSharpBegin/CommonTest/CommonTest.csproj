@@ -64,9 +64,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Chapter06\Ch06Ex05.cs" />
-    <Compile Include="Chapter07\Ch07Ex01.cs" />
-    <Compile Include="Chapter09\Chapter09Ex03.cs" />
     <Compile Include="Chapter13\Ch13Ex02.cs" />
     <Compile Include="Chapter13\Ch13Ex03\Ch13Ex03.cs" />
     <Compile Include="Chapter13\Ch13Ex03\Connection.cs" />
@@ -91,10 +88,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Chapter11\" />
-    <Folder Include="Chapter12\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

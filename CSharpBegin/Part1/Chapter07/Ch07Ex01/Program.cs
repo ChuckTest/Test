@@ -2,17 +2,19 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Diagnostics;//Debug.WriteLine();
-namespace CommonTest.Chapter07
+using System.Threading.Tasks;
+using System.Diagnostics;
+
+namespace Ch07Ex01
 {
-    class Ch07Ex01
+    class Program
     {
-        public static void Method()
+        static void Main(string[] args)
         {
             int[] testArray = { 4, 7, 4, 2, 7, 3, 7, 8, 3, 9, 1, 9 };//初始化一个测试用的整数数组
             int[] maxValIndices;//声明一个整数数组,用于存储Maxima函数的下标结果
             //调用函数
-            int maxVal = Maxima(testArray,out maxValIndices);
+            int maxVal = Maxima(testArray, out maxValIndices);
             //输出返回结果
             Console.WriteLine("Maximum value {0} found at element indices.", maxVal);
             foreach (int index in maxValIndices)
@@ -31,7 +33,7 @@ namespace CommonTest.Chapter07
         static int Maxima(int[] integers, out int[] indices)//最大数，极大值
         {
             Debug.WriteLine("Maximum value search started.");
-            
+
             //开始搜索时，假定源数组中的第一个元素就是最大值,且数组中只有一个最大值
             indices = new int[1];
             int maxVal = integers[0];//将数组中的第一个元素赋予maxVal
