@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
-namespace CommonTest.Chapter13
+namespace Ch13Ex02
 {
     /// <summary>
     /// 订阅事件的类

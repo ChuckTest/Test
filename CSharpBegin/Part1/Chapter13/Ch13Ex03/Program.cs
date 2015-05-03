@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
-namespace CommonTest.Chapter13.Ch13Ex03
+namespace Ch13Ex03
 {
-    class Ch13Ex03
+    class Program
     {
-        public static void Method()
+        static void Main(string[] args)
         {
             Connection conn1 = new Connection();
             conn1.Name = "First Connection";
@@ -18,6 +19,7 @@ namespace CommonTest.Chapter13.Ch13Ex03
             conn2.MessageArrived += new MessageHandler(dis.DisplayMessage);
             conn1.Connect();
             conn2.Connect();
+            Console.ReadKey();
         }
     }
 }

@@ -2,15 +2,17 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using System.Timers;
-namespace CommonTest.Chapter13.Ch13Ex03
+
+namespace Ch13Ex03
 {
     /// <summary>
     /// 事件的委托包含了事件处理程序中常见的两个参数
     /// </summary>
     /// <param name="conn"></param>
     /// <param name="e"></param>
-    public delegate void MessageHandler(Connection conn,MessageArrivedEventArgs e);
+    public delegate void MessageHandler(Connection conn, MessageArrivedEventArgs e);
     public class Connection
     {
         public event MessageHandler MessageArrived;
@@ -32,14 +34,14 @@ namespace CommonTest.Chapter13.Ch13Ex03
             set { name = value; }
         }
         private static Random random = new Random();
-        private void CheckForMessage(object sender,EventArgs e)
+        private void CheckForMessage(object sender, EventArgs e)
         {
             Console.WriteLine("Checking for new messages.");
             if (random.Next(9) == 0)
             {
                 if (MessageArrived != null)
                 {
-                    MessageArrived(this,new MessageArrivedEventArgs("Hello Mum!"));
+                    MessageArrived(this, new MessageArrivedEventArgs("Hello Mum!"));
                 }
             }
         }

@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using System.Timers;
-namespace CommonTest.Chapter13
+
+namespace Ch13Ex02
 {
     //在定义事件之前，必须先定义一个委托，以用于该事件
     //这个委托指定了事件处理方法必须有的返回类型和参数

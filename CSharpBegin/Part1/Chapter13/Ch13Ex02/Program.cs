@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
-namespace CommonTest.Chapter13
+namespace Ch13Ex02
 {
-    class Ch13Ex02
+    class Program
     {
-        public static void Method()
+        static void Main(string[] args)
         {
             Connection conn = new Connection();
             Display dis = new Display();
@@ -15,6 +16,8 @@ namespace CommonTest.Chapter13
             //string参数可以把Connection对象conn接收到的即时消息发送给Display的对象dis
             conn.MessageArrived += new MessageHandler(dis.DisplayMessage);
             conn.Connect();
+
+            Console.ReadKey();
         }
     }
 }
