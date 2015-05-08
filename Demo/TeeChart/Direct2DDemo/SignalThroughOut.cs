@@ -20,7 +20,7 @@ namespace Direct2DDemo
         public SignalThroughOut()
         {
             InitializeComponent();
-            Graphics3DDirect2D D2D = new Graphics3DDirect2D(tChart.Chart);
+            D2D = new Graphics3DDirect2D(tChart.Chart);
             tChart.Graphics3D = D2D;
             tChart.Graphics3D.BufferStyle = BufferStyle.None;
             InitializeCharts();
@@ -57,18 +57,21 @@ namespace Direct2DDemo
             fastLine6.LinePen.Width = 2;
 
             //*********** axes ***********
-            tChart.Axes.Bottom.Labels.Font.Color = Color.LightGray;
+            tChart.Axes.Bottom.Labels.Font.Color = Color.LightGray;//X轴刻度的颜色
+            tChart.Axes.Left.Labels.Font.Color = Color.LightGray;//Y轴可读的颜色
 
-            tChart.Axes.Left.EndPosition = 100 / (tChart.Series.Count);//设置fastline的y轴的结束位置
-            tChart.Axes.Left.Labels.Font.Color = Color.LightGray;
+             //一共有6条曲线
+            //第一条曲线的纵轴 直接对应于Y轴
+            tChart.Axes.Left.EndPosition = 100 / (tChart.Series.Count);//设置fastline的左轴的结束位置
             
+            //剩下的5条曲线，需要添加自定义的纵轴
             addCustomLeftAxis(fastLine2);
             addCustomLeftAxis(fastLine3);
             addCustomLeftAxis(fastLine4);
             addCustomLeftAxis(fastLine5);
             addCustomLeftAxis(fastLine6);
 
-            tChart.Aspect.View3D = false;
+            tChart.Aspect.View3D = false;//取消3D显示效果
 
             tChart.Walls.Visible = false;
             tChart.Legend.Visible = false;
@@ -79,39 +82,82 @@ namespace Direct2DDemo
             tChart.Panel.Bevel.Outer = BevelStyles.None;
         }
 
-        private void addCustomLeftAxis(Series s)
+        /// <summary>
+        /// 给指定的曲线添加自定义的纵轴
+        /// </summary>
+        /// <param name="curve"></param>
+        private void addCustomLeftAxis(Series curve)
         {
-            Axis a = new Axis(false, false, tChart.Chart);
+            Axis axis = new Axis(false, false, tChart.Chart);//创建一个新的坐标轴，作为自定义的纵轴
 
-            double axisShare = 100 / (tChart.Series.Count);
+            double axisShare = 100 / (tChart.Series.Count);//计算单个坐标轴占据Y轴的百分比
 
-            a.StartPosition = axisShare * tChart.Series.IndexOf(s);
-            a.EndPosition = (axisShare * tChart.Series.IndexOf(s)) + axisShare;
-            a.Labels.Font.Color = Color.LightGray;
+            axis.StartPosition = axisShare * tChart.Series.IndexOf(curve);//设置坐标轴的其实位置
+            axis.EndPosition = (axisShare * tChart.Series.IndexOf(curve)) + axisShare;//设置坐标轴的结束位置
 
-            a.SetMinMax(-2.5, 2.5);
+            axis.Labels.Font.Color = Color.LightGray;//自定义坐标轴的刻度的颜色
 
-            switch (1 + tChart.Series.IndexOf(s))
+            axis.SetMinMax(-2.5, 2.5);//设置坐标轴的默认的取值范围
+
+            //根据每个曲线对应的数值的取值范围决定坐标轴的范围
+            switch (1 + tChart.Series.IndexOf(curve))
             {
-                case 2: a.SetMinMax(-Max(ff.arr2), Max(ff.arr2)); break;
-                case 3: a.SetMinMax(-Max(ff.arr3), Max(ff.arr3)); break;
-                case 4: a.SetMinMax(-Max(ff.arr4), Max(ff.arr4)); break;
-                case 5: a.SetMinMax(-Max(ff.arr5), Max(ff.arr5)); break;
-                case 6: a.SetMinMax(-Max(ff.arr6), Max(ff.arr6)); break;
+                case 2:
+                    axis.SetMinMax(Min(testData.arr2), Max(testData.arr2));
+                    break;
+                case 3:
+                    axis.SetMinMax(Min(testData.arr3), Max(testData.arr3)); 
+                    break;
+                case 4:
+                    axis.SetMinMax(Min(testData.arr4), Max(testData.arr4));
+                    break;
+                case 5:
+                    axis.SetMinMax(Min(testData.arr5), Max(testData.arr5)); 
+                    break;
+                case 6:
+                    axis.SetMinMax(Min(testData.arr6), Max(testData.arr6)); 
+                    break;
             }
-            tChart.Axes.Custom.Add(a);
-            s.CustomVertAxis = a;
+
+            tChart.Axes.Custom.Add(axis);//将坐标轴添加到图表的自定义坐标轴中
+
+            curve.CustomVertAxis = axis;//将曲线curve和坐标轴axis绑定
         }
 
+        /// <summary>
+        /// 从指定的数组中筛选出最大值
+        /// </summary>
+        /// <param name="array"></param>
+        /// <returns></returns>
         private double Max(double[] array)
         {
             double maxVal = array[0];
             for (int i = 1; i < array.Length; i++)
             {
                 if (array[i] > maxVal)
+                {
                     maxVal = array[i];
+                }
             }
             return maxVal;
+        }
+
+        /// <summary>
+        /// 从指定的数组中筛选出最小值
+        /// </summary>
+        /// <param name="array"></param>
+        /// <returns></returns>
+        private double Min(double[] array)
+        {
+            double minVal = array[0];
+            for (int i = 0; i < array.Length; i++)
+            {
+                if (array[i] < minVal)
+                {
+                    minVal=array[i];
+                }
+            }
+            return minVal;
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -122,35 +168,50 @@ namespace Direct2DDemo
 
                 tChart.AutoRepaint = false;
 
+                //一次添加15个点
                 for (int i = 0; i < 15; i++)
                 {
-                    if (dataCounter >= ff.arr1.Length)
-                        rr = dataCounter % ff.arr1.Length;
+                    if (dataCounter >= testData.arr1.Length)
+                    {
+                        rr = dataCounter % testData.arr1.Length;
+                    }
                     else
+                    {
                         rr = dataCounter;
+                    }
 
-                    if (checkBox2.Checked)
+                    if (moveFlag)
                     {
+                        //滚动效果
+
+                        //如果底轴的最大值-曲线X值列表的最大值=50  则重新调整底轴的范围
                         if (tChart.Axes.Bottom.Maximum - fastLine.XValues.Maximum == 50)
+                        {
+                            //底轴的最小值和最大值同时增加15，确保平移的效果
                             tChart.Axes.Bottom.SetMinMax(tChart.Axes.Bottom.Minimum + 15, tChart.Axes.Bottom.Maximum + 15);
+                        }
                     }
                     else
                     {
+                        //不需要滚动效果
                         if ((dataCounter > 0) && (rr == 0))
+                        {
                             tChart.Axes.Bottom.SetMinMax(dataCounter, dataCounter + 1000);
+                        }
                     }
 
-                    fastLine.Add(dataCounter, ff.arr1[rr]);
-                    fastLine2.Add(dataCounter, ff.arr2[rr]);
-                    fastLine3.Add(dataCounter, ff.arr3[rr]);
-                    fastLine4.Add(dataCounter, ff.arr4[rr]);
-                    fastLine5.Add(dataCounter, ff.arr5[rr]);
-                    fastLine6.Add(dataCounter, ff.arr6[rr]);
+                    fastLine.Add(dataCounter, testData.arr1[rr]);
+                    fastLine2.Add(dataCounter, testData.arr2[rr]);
+                    fastLine3.Add(dataCounter, testData.arr3[rr]);
+                    fastLine4.Add(dataCounter, testData.arr4[rr]);
+                    fastLine5.Add(dataCounter, testData.arr5[rr]);
+                    fastLine6.Add(dataCounter, testData.arr6[rr]);
 
                     dataCounter++;
 
                 }
 
+                //曲线上的点数超过1万，就删除前面5000个点
                 if (fastLine.Count > 10000)
                 {
                     fastLine.Delete(0, 5000);
@@ -188,10 +249,13 @@ namespace Direct2DDemo
             string name;
             Debug.WriteLineIf(Utils.CalcFramesPerSecond, "Utils.FramesPerSecond计算开启");
 
+            //帧数大于0的时候，进行统计
             if (Utils.FramesPerSecond > 0)
             {
                 frames.Add(Utils.FramesPerSecond);
             }
+
+            //计算每秒刷新的平均帧数
             if (frames.Count > 0)
             {
                 fps = GetAverage();
@@ -233,21 +297,24 @@ namespace Direct2DDemo
         {
             return frames.Average().ToString("F2");
         }
+
         private void rbDirect2D_CheckedChanged(object sender, EventArgs e)
         {
             timer1.Enabled = false;
 
             if (rbDirect2D.Checked)
             {
+                //使用Direct2D
                 setD2D(tChart);
             }
             else
             {
+                //使用GDI+
                 setGDIPlus(tChart);
             }
 
             OnChangeParam();
-            timer1.Enabled = checkBox1.Checked;
+            timer1.Enabled = checkBoxEnabled.Checked;
         }
 
         private void setD2D(TChart chart)
@@ -297,13 +364,13 @@ namespace Direct2DDemo
             rbDirect2D_CheckedChanged(sender, e);
         }
 
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        private void checkBoxEnabled_CheckedChanged(object sender, EventArgs e)
         {
             OnChangeParam();
-            timer1.Enabled = checkBox1.Checked;
+            timer1.Enabled = checkBoxEnabled.Checked;
         }
 
-        private Graphics3DDirect2D D2D = null;//继承自Graphics3D, IDirect2D
+        private Graphics3DDirect2D D2D = null;//继承自Graphics3D, IDirect2D 同时使用了SlimDX
         private Graphics3DGdiPlus GDI = null;//继承自Graphics3D
 
         private FastLine fastLine;
@@ -312,13 +379,28 @@ namespace Direct2DDemo
         private FastLine fastLine4;
         private FastLine fastLine5;
         private FastLine fastLine6;
-        protected TestData ff = new TestData();
+        protected TestData testData = new TestData();
 
         protected long ticks;
+
+        /// <summary>
+        /// 每秒的刷新的帧数的集合
+        /// </summary>
         protected List<float> frames = new List<float>();
+
         public int PointsPerFrame { get; set; }
 
         int dataCounter = 0;
+
+        /// <summary>
+        /// 标记是否移动平移曲线
+        /// </summary>
+        private bool moveFlag;
+
+        private void checkBoxMove_CheckedChanged(object sender, EventArgs e)
+        {
+            moveFlag = checkBoxMove.Checked;
+        }
 
     }
 }

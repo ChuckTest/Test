@@ -30,8 +30,8 @@
         {
             this.components = new System.ComponentModel.Container();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.checkBox2 = new System.Windows.Forms.CheckBox();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.checkBoxMove = new System.Windows.Forms.CheckBox();
+            this.checkBoxEnabled = new System.Windows.Forms.CheckBox();
             this.cbAntiAliased = new System.Windows.Forms.CheckBox();
             this.rbGDIplus = new System.Windows.Forms.RadioButton();
             this.rbDirect2D = new System.Windows.Forms.RadioButton();
@@ -44,8 +44,8 @@
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.checkBox2);
-            this.panel1.Controls.Add(this.checkBox1);
+            this.panel1.Controls.Add(this.checkBoxMove);
+            this.panel1.Controls.Add(this.checkBoxEnabled);
             this.panel1.Controls.Add(this.cbAntiAliased);
             this.panel1.Controls.Add(this.rbGDIplus);
             this.panel1.Controls.Add(this.rbDirect2D);
@@ -55,28 +55,29 @@
             this.panel1.Size = new System.Drawing.Size(708, 29);
             this.panel1.TabIndex = 0;
             // 
-            // checkBox2
+            // checkBoxMove
             // 
-            this.checkBox2.AutoSize = true;
-            this.checkBox2.Location = new System.Drawing.Point(503, 7);
-            this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(108, 16);
-            this.checkBox2.TabIndex = 4;
-            this.checkBox2.Text = "Scroll or Page";
-            this.checkBox2.UseVisualStyleBackColor = true;
+            this.checkBoxMove.AutoSize = true;
+            this.checkBoxMove.Location = new System.Drawing.Point(503, 7);
+            this.checkBoxMove.Name = "checkBoxMove";
+            this.checkBoxMove.Size = new System.Drawing.Size(108, 16);
+            this.checkBoxMove.TabIndex = 4;
+            this.checkBoxMove.Text = "Scroll or Page";
+            this.checkBoxMove.UseVisualStyleBackColor = true;
+            this.checkBoxMove.CheckedChanged += new System.EventHandler(this.checkBoxMove_CheckedChanged);
             // 
-            // checkBox1
+            // checkBoxEnabled
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Checked = true;
-            this.checkBox1.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox1.Location = new System.Drawing.Point(403, 7);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(72, 16);
-            this.checkBox1.TabIndex = 3;
-            this.checkBox1.Text = "animated";
-            this.checkBox1.UseVisualStyleBackColor = true;
-            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            this.checkBoxEnabled.AutoSize = true;
+            this.checkBoxEnabled.Checked = true;
+            this.checkBoxEnabled.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBoxEnabled.Location = new System.Drawing.Point(403, 7);
+            this.checkBoxEnabled.Name = "checkBoxEnabled";
+            this.checkBoxEnabled.Size = new System.Drawing.Size(66, 16);
+            this.checkBoxEnabled.TabIndex = 3;
+            this.checkBoxEnabled.Text = "enabled";
+            this.checkBoxEnabled.UseVisualStyleBackColor = true;
+            this.checkBoxEnabled.CheckedChanged += new System.EventHandler(this.checkBoxEnabled_CheckedChanged);
             // 
             // cbAntiAliased
             // 
@@ -123,16 +124,271 @@
             // 
             // tChart
             // 
+            // 
+            // 
+            // 
+            // 
+            // 
+            // 
+            // 
+            // 
+            // 
+            // 
+            // 
+            // 
+            this.tChart.Axes.Bottom.Labels.Bevel.ColorOne = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.tChart.Axes.Bottom.Labels.Bevel.ColorTwo = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.tChart.Axes.Bottom.Labels.Bevel.StringColorOne = "FFFFFFFF";
+            this.tChart.Axes.Bottom.Labels.Bevel.StringColorTwo = "FF808080";
+            // 
+            // 
+            // 
+            // 
+            // 
+            // 
+            this.tChart.Axes.Bottom.Title.Bevel.ColorOne = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.tChart.Axes.Bottom.Title.Bevel.ColorTwo = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.tChart.Axes.Bottom.Title.Bevel.StringColorOne = "FFFFFFFF";
+            this.tChart.Axes.Bottom.Title.Bevel.StringColorTwo = "FF808080";
+            // 
+            // 
+            // 
+            // 
+            // 
+            // 
+            // 
+            // 
+            // 
+            this.tChart.Axes.Depth.Labels.Bevel.ColorOne = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.tChart.Axes.Depth.Labels.Bevel.ColorTwo = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.tChart.Axes.Depth.Labels.Bevel.StringColorOne = "FFFFFFFF";
+            this.tChart.Axes.Depth.Labels.Bevel.StringColorTwo = "FF808080";
+            this.tChart.Axes.Depth.LabelsAsSeriesTitles = true;
+            // 
+            // 
+            // 
+            // 
+            // 
+            // 
+            this.tChart.Axes.Depth.Title.Bevel.ColorOne = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.tChart.Axes.Depth.Title.Bevel.ColorTwo = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.tChart.Axes.Depth.Title.Bevel.StringColorOne = "FFFFFFFF";
+            this.tChart.Axes.Depth.Title.Bevel.StringColorTwo = "FF808080";
+            // 
+            // 
+            // 
+            // 
+            // 
+            // 
+            // 
+            // 
+            // 
+            this.tChart.Axes.DepthTop.Labels.Bevel.ColorOne = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.tChart.Axes.DepthTop.Labels.Bevel.ColorTwo = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.tChart.Axes.DepthTop.Labels.Bevel.StringColorOne = "FFFFFFFF";
+            this.tChart.Axes.DepthTop.Labels.Bevel.StringColorTwo = "FF808080";
+            this.tChart.Axes.DepthTop.LabelsAsSeriesTitles = true;
+            // 
+            // 
+            // 
+            // 
+            // 
+            // 
+            this.tChart.Axes.DepthTop.Title.Bevel.ColorOne = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.tChart.Axes.DepthTop.Title.Bevel.ColorTwo = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.tChart.Axes.DepthTop.Title.Bevel.StringColorOne = "FFFFFFFF";
+            this.tChart.Axes.DepthTop.Title.Bevel.StringColorTwo = "FF808080";
+            // 
+            // 
+            // 
+            // 
+            // 
+            // 
+            // 
+            // 
+            // 
+            this.tChart.Axes.Left.Labels.Bevel.ColorOne = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.tChart.Axes.Left.Labels.Bevel.ColorTwo = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.tChart.Axes.Left.Labels.Bevel.StringColorOne = "FFFFFFFF";
+            this.tChart.Axes.Left.Labels.Bevel.StringColorTwo = "FF808080";
+            // 
+            // 
+            // 
+            // 
+            // 
+            // 
+            this.tChart.Axes.Left.Title.Bevel.ColorOne = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.tChart.Axes.Left.Title.Bevel.ColorTwo = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.tChart.Axes.Left.Title.Bevel.StringColorOne = "FFFFFFFF";
+            this.tChart.Axes.Left.Title.Bevel.StringColorTwo = "FF808080";
+            // 
+            // 
+            // 
+            // 
+            // 
+            // 
+            // 
+            // 
+            // 
+            this.tChart.Axes.Right.Labels.Bevel.ColorOne = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.tChart.Axes.Right.Labels.Bevel.ColorTwo = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.tChart.Axes.Right.Labels.Bevel.StringColorOne = "FFFFFFFF";
+            this.tChart.Axes.Right.Labels.Bevel.StringColorTwo = "FF808080";
+            // 
+            // 
+            // 
+            // 
+            // 
+            // 
+            this.tChart.Axes.Right.Title.Bevel.ColorOne = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.tChart.Axes.Right.Title.Bevel.ColorTwo = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.tChart.Axes.Right.Title.Bevel.StringColorOne = "FFFFFFFF";
+            this.tChart.Axes.Right.Title.Bevel.StringColorTwo = "FF808080";
+            // 
+            // 
+            // 
+            // 
+            // 
+            // 
+            // 
+            // 
+            // 
+            this.tChart.Axes.Top.Labels.Bevel.ColorOne = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.tChart.Axes.Top.Labels.Bevel.ColorTwo = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.tChart.Axes.Top.Labels.Bevel.StringColorOne = "FFFFFFFF";
+            this.tChart.Axes.Top.Labels.Bevel.StringColorTwo = "FF808080";
+            // 
+            // 
+            // 
+            // 
+            // 
+            // 
+            this.tChart.Axes.Top.Title.Bevel.ColorOne = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.tChart.Axes.Top.Title.Bevel.ColorTwo = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.tChart.Axes.Top.Title.Bevel.StringColorOne = "FFFFFFFF";
+            this.tChart.Axes.Top.Title.Bevel.StringColorTwo = "FF808080";
             this.tChart.Dock = System.Windows.Forms.DockStyle.Fill;
+            // 
+            // 
+            // 
+            // 
+            // 
+            // 
+            this.tChart.Footer.Bevel.ColorOne = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.tChart.Footer.Bevel.ColorTwo = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.tChart.Footer.Bevel.StringColorOne = "FFFFFFFF";
+            this.tChart.Footer.Bevel.StringColorTwo = "FF808080";
+            // 
+            // 
+            // 
+            // 
+            // 
+            // 
+            this.tChart.Header.Bevel.ColorOne = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.tChart.Header.Bevel.ColorTwo = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.tChart.Header.Bevel.StringColorOne = "FFFFFFFF";
+            this.tChart.Header.Bevel.StringColorTwo = "FF808080";
+            // 
+            // 
+            // 
+            // 
+            // 
+            // 
+            this.tChart.Legend.Bevel.ColorOne = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.tChart.Legend.Bevel.ColorTwo = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.tChart.Legend.Bevel.StringColorOne = "FFFFFFFF";
+            this.tChart.Legend.Bevel.StringColorTwo = "FF808080";
+            // 
+            // 
+            // 
+            // 
+            // 
+            // 
+            this.tChart.Legend.Title.Bevel.ColorOne = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.tChart.Legend.Title.Bevel.ColorTwo = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.tChart.Legend.Title.Bevel.StringColorOne = "FFFFFFFF";
+            this.tChart.Legend.Title.Bevel.StringColorTwo = "FF808080";
             this.tChart.Location = new System.Drawing.Point(0, 0);
             this.tChart.Name = "tChart";
+            // 
+            // 
+            // 
+            // 
+            // 
+            // 
+            this.tChart.Panel.Bevel.ColorOne = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.tChart.Panel.Bevel.ColorTwo = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.tChart.Panel.Bevel.StringColorOne = "FFFFFFFF";
+            this.tChart.Panel.Bevel.StringColorTwo = "FF808080";
             this.tChart.Size = new System.Drawing.Size(708, 385);
+            // 
+            // 
+            // 
+            // 
+            // 
+            // 
+            this.tChart.SubFooter.Bevel.ColorOne = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.tChart.SubFooter.Bevel.ColorTwo = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.tChart.SubFooter.Bevel.StringColorOne = "FFFFFFFF";
+            this.tChart.SubFooter.Bevel.StringColorTwo = "FF808080";
+            // 
+            // 
+            // 
+            // 
+            // 
+            // 
+            this.tChart.SubHeader.Bevel.ColorOne = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.tChart.SubHeader.Bevel.ColorTwo = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.tChart.SubHeader.Bevel.StringColorOne = "FFFFFFFF";
+            this.tChart.SubHeader.Bevel.StringColorTwo = "FF808080";
             this.tChart.TabIndex = 0;
+            // 
+            // 
+            // 
+            // 
+            // 
+            // 
+            // 
+            // 
+            // 
+            this.tChart.Walls.Back.Bevel.ColorOne = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.tChart.Walls.Back.Bevel.ColorTwo = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.tChart.Walls.Back.Bevel.StringColorOne = "FFFFFFFF";
+            this.tChart.Walls.Back.Bevel.StringColorTwo = "FF808080";
+            // 
+            // 
+            // 
+            // 
+            // 
+            // 
+            this.tChart.Walls.Bottom.Bevel.ColorOne = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.tChart.Walls.Bottom.Bevel.ColorTwo = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.tChart.Walls.Bottom.Bevel.StringColorOne = "FFFFFFFF";
+            this.tChart.Walls.Bottom.Bevel.StringColorTwo = "FF808080";
+            // 
+            // 
+            // 
+            // 
+            // 
+            // 
+            this.tChart.Walls.Left.Bevel.ColorOne = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.tChart.Walls.Left.Bevel.ColorTwo = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.tChart.Walls.Left.Bevel.StringColorOne = "FFFFFFFF";
+            this.tChart.Walls.Left.Bevel.StringColorTwo = "FF808080";
+            // 
+            // 
+            // 
+            // 
+            // 
+            // 
+            this.tChart.Walls.Right.Bevel.ColorOne = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.tChart.Walls.Right.Bevel.ColorTwo = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.tChart.Walls.Right.Bevel.StringColorOne = "FFFFFFFF";
+            this.tChart.Walls.Right.Bevel.StringColorTwo = "FF808080";
             // 
             // timer1
             // 
             this.timer1.Enabled = true;
-            this.timer1.Interval = 10;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // SignalThroughOut
@@ -158,8 +414,8 @@
         private System.Windows.Forms.RadioButton rbGDIplus;
         private System.Windows.Forms.RadioButton rbDirect2D;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.CheckBox checkBox2;
-        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.CheckBox checkBoxMove;
+        private System.Windows.Forms.CheckBox checkBoxEnabled;
         private System.Windows.Forms.CheckBox cbAntiAliased;
         private Steema.TeeChart.TChart tChart;
         private System.Windows.Forms.Timer timer1;
