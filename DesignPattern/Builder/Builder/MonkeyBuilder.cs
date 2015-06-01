@@ -43,6 +43,5 @@ namespace Builder.Builder
         {
             animal.Tail = "Moneky's Tail has been built";
         }
-
     }
 }
