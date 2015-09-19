@@ -1,15 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Threading;
+
 namespace AsyncProcedure
 {
     /// <summary>
     /// 声明一个委托 委托的名字是AsyncHandler
     /// </summary>
-    /// <param name="name"></param>
     public delegate void AsyncHandler();//委托的声明方式类似于函数，只是比函数多了一个delegate关键字
     
     static class AsyncTest
@@ -30,7 +26,7 @@ namespace AsyncProcedure
 
     class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
             Console.WriteLine("Program类中的Main()函数的线程ID是{0}", Thread.CurrentThread.ManagedThreadId);//Environment.CurrentManagedThreadId
             if (Thread.CurrentThread.IsThreadPoolThread)//判断当前线程是否托管在线程池上

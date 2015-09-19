@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading;
+
 namespace SyncProcedure
 {
     static class SyncTest
@@ -23,7 +22,7 @@ namespace SyncProcedure
 
     class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
             Console.WriteLine("Program类中的Main()函数的线程ID是{0}", Thread.CurrentThread.ManagedThreadId);//Environment.CurrentManagedThreadId
             if (Thread.CurrentThread.IsThreadPoolThread)//判断当前线程是否托管在线程池上
