@@ -16,27 +16,27 @@ namespace AsyncCallBackDemo
         /// <summary>
         /// 保存[域名或IP]解析的结果或者异常信息
         /// </summary>
-        static ArrayList hostData = new ArrayList();
+        static readonly ArrayList hostData = new ArrayList();
 
         /// <summary>
         /// 存放域名或IP
         /// </summary>
-        static StringCollection hostNames = new StringCollection();
+        static readonly StringCollection hostNames = new StringCollection();
 
-        static void Main(string[] args)
+        static void Main()
         {
-            string host = string.Empty;
+            string host;
             //循环输入域名或IP
             do
             {
                 Console.WriteLine("请输入域名或IP(或Enter结束)");
                 host = Console.ReadLine();
-                if (host.Length > 0)
+                if (string.IsNullOrEmpty(host) == false)
                 {
-                    Interlocked.Increment(ref count);//未解析数量加1
+                    Interlocked.Increment(ref count); //未解析数量加1
                     Dns.BeginGetHostEntry(host, GetDnsInfo, host);
                 }
-            } while (host.Length > 0);
+            } while (string.IsNullOrEmpty(host) == false);
             
             while (count > 0)
             {
@@ -55,9 +55,9 @@ namespace AsyncCallBackDemo
                 }
                 else
                 {
-                    for (int j = 0; j < ip.AddressList.Length; j++)
+                    foreach (IPAddress t in ip.AddressList)
                     {
-                        Console.WriteLine(ip.AddressList[j]);
+                        Console.WriteLine(t);
                     }
                 }
                 Console.WriteLine();

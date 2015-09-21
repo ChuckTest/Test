@@ -11,8 +11,7 @@ namespace EndOperationNameDemo
         /// <summary>
         /// 通过直接调用EndOperationName来阻塞主线程
         /// </summary>
-        /// <param name="args"></param>
-        static void Main(string[] args)
+        static void Main()
         {
             string str = "www.baidu.com";
             IAsyncResult result = Dns.BeginGetHostEntry(str, null, null);//不使用AsyncCallBack委托，也不传递应用程序的状态
@@ -28,7 +27,7 @@ namespace EndOperationNameDemo
                 }
                 for (int i = 0; i < h.AddressList.Length; i++)
                 {
-                    Console.WriteLine("IP{0}：{1}", i, h.AddressList[i].ToString());
+                    Console.WriteLine("IP{0}：{1}", i, h.AddressList[i]);
                 }
             }
             catch (Exception ex)

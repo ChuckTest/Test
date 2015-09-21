@@ -11,10 +11,9 @@ namespace AsyncWaitHandle
         /// <summary>
         /// 通过调用IAsyncResult中AsyncWaitHandle的WaitOne方法来阻塞主线程
         /// </summary>
-        /// <param name="args"></param>
-        static void Main(string[] args)
+        static void Main()
         {
-            string str = "www.baidu.com";
+            const string str = "www.baidu.com";
             IAsyncResult result = Dns.BeginGetHostEntry(str, null, null);//不使用AsyncCallBack委托，也不传递应用程序的状态
             //这边可以做其他的事情
             Console.WriteLine("在调用EndGetHostEntry方法前还可以处理其他事情");
@@ -29,7 +28,7 @@ namespace AsyncWaitHandle
                 }
                 for (int i = 0; i < h.AddressList.Length; i++)
                 {
-                    Console.WriteLine("IP{0}：{1}", i, h.AddressList[i].ToString());
+                    Console.WriteLine("IP{0}：{1}", i, h.AddressList[i]);
                 }
             }
             catch (Exception ex)

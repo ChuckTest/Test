@@ -8,7 +8,7 @@ namespace Poll
     /// </summary>
     class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
             string str = "www.baidu.com";
             IAsyncResult result = Dns.BeginGetHostEntry(str, null, null);//不使用AsyncCallBack委托，也不传递应用程序的状态
@@ -38,7 +38,7 @@ namespace Poll
                 }
                 for (int i = 0; i < h.AddressList.Length; i++)
                 {
-                    Console.WriteLine("IP{0}：{1}", i, h.AddressList[i].ToString());
+                    Console.WriteLine("IP{0}：{1}", i, h.AddressList[i]);
                 }
             }
             catch (Exception ex)
