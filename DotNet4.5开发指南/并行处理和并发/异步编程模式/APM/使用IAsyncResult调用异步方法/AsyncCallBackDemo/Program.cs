@@ -62,7 +62,7 @@ namespace AsyncCallBackDemo
                 }
                 Console.WriteLine();
             }
-
+            Console.WriteLine("Main函数执行到最后一行");
             Console.ReadLine();
         }
 
@@ -72,6 +72,7 @@ namespace AsyncCallBackDemo
         /// <param name="result"></param>
         static void GetDnsInfo(IAsyncResult result)
         {
+            Console.WriteLine("开始执行回调方法");
             string host = (string)result.AsyncState;
             hostNames.Add(host);
             try 
@@ -87,6 +88,7 @@ namespace AsyncCallBackDemo
             {
                 Interlocked.Decrement(ref count);//解析完成,未解析数量减1
             }
+            Console.WriteLine("回调方法执行结束");
         }
     }
 }
