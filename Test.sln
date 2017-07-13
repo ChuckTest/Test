@@ -250,6 +250,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Reflection", "Reflection", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReflectionDemo", "DotNetFrameworkClassLibrary\System.Reflection\Reflection\ReflectionDemo\ReflectionDemo.csproj", "{2FB5F646-80FC-4FB0-8037-1DF9B751EE53}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{7AFAE539-C8FC-4FA8-9AE2-80CB9824704B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Encoding", "Demo\Encoding\Encoding.csproj", "{2535AFCB-D574-4E7D-B50E-EB5AF597B66B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -940,6 +944,18 @@ Global
 		{2FB5F646-80FC-4FB0-8037-1DF9B751EE53}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{2FB5F646-80FC-4FB0-8037-1DF9B751EE53}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{2FB5F646-80FC-4FB0-8037-1DF9B751EE53}.Release|x86.ActiveCfg = Release|Any CPU
+		{2535AFCB-D574-4E7D-B50E-EB5AF597B66B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2535AFCB-D574-4E7D-B50E-EB5AF597B66B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2535AFCB-D574-4E7D-B50E-EB5AF597B66B}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{2535AFCB-D574-4E7D-B50E-EB5AF597B66B}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{2535AFCB-D574-4E7D-B50E-EB5AF597B66B}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{2535AFCB-D574-4E7D-B50E-EB5AF597B66B}.Debug|x86.Build.0 = Debug|Any CPU
+		{2535AFCB-D574-4E7D-B50E-EB5AF597B66B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2535AFCB-D574-4E7D-B50E-EB5AF597B66B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2535AFCB-D574-4E7D-B50E-EB5AF597B66B}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{2535AFCB-D574-4E7D-B50E-EB5AF597B66B}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{2535AFCB-D574-4E7D-B50E-EB5AF597B66B}.Release|x86.ActiveCfg = Release|Any CPU
+		{2535AFCB-D574-4E7D-B50E-EB5AF597B66B}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -1061,5 +1077,7 @@ Global
 		{B7BCF3C6-F925-4324-B3C9-E8131F39D8CB} = {2A0423D8-DDD9-4186-8EF4-55FEB7C729EA}
 		{159E6AE3-BA80-4C1D-978C-68AF7E687893} = {B7BCF3C6-F925-4324-B3C9-E8131F39D8CB}
 		{2FB5F646-80FC-4FB0-8037-1DF9B751EE53} = {159E6AE3-BA80-4C1D-978C-68AF7E687893}
+		{7AFAE539-C8FC-4FA8-9AE2-80CB9824704B} = {E5CB8E08-5D08-4CFA-866E-3E492A9C3FAD}
+		{2535AFCB-D574-4E7D-B50E-EB5AF597B66B} = {7AFAE539-C8FC-4FA8-9AE2-80CB9824704B}
 	EndGlobalSection
 EndGlobal
